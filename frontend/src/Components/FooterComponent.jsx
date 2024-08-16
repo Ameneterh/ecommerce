@@ -4,7 +4,10 @@ import { BsFacebook, BsInstagram, BsTwitter, BsGithub } from "react-icons/bs";
 
 export default function FooterComponent() {
   return (
-    <Footer container className="w-full  border-t-4 border-t-slate-800">
+    <Footer
+      container
+      className="w-full border-t-4 border-t-slate-800 bg-slate-500"
+    >
       <div className="w-full flex flex-col text-center items-center justify-center">
         <div className="w-full justify-center lg:justify-between sm:flex items-center gap-4">
           {/* <Footer.Brand
@@ -19,28 +22,28 @@ export default function FooterComponent() {
             <img src="/site_logo.png" className="h-16 w-16" />
             <span className="text-3xl font-bold">E-COMM</span>
           </div>
-          <Footer.LinkGroup className="flex flex-wrap items-center justify-center gap-3 mb-3">
-            <Footer.Link as="div">
+          <Footer.LinkGroup className="flex flex-wrap items-center justify-center gap-3 mb-3 text-slate-950">
+            <Footer.Link as="div" className="hover:text-white">
               <Link to="/">Home</Link>
             </Footer.Link>
-            <Footer.Link as="div">
+            <Footer.Link as="div" className="hover:text-white">
               <Link to="/shop">Shop</Link>
             </Footer.Link>
-            <Footer.Link as="div">
+            <Footer.Link as="div" className="hover:text-white">
               <Link to="/promotion">Promotion</Link>
             </Footer.Link>
-            <Footer.Link as="div">
+            <Footer.Link as="div" className="hover:text-white">
               <Link to="/blog">Blog</Link>
             </Footer.Link>
-            <Footer.Link as="div">
+            <Footer.Link as="div" className="hover:text-white">
               <Link to="/contact">Contact</Link>
             </Footer.Link>
           </Footer.LinkGroup>
-          <div className="h-10 flex items-center justify-between rounded-full focus-within:shadow-md">
+          <div className="h-10 flex items-center justify-between rounded-full focus-within:shadow-md ">
             <input
               //   type="email"
               placeholder="your email"
-              className="text-sm flex-1 rounded-l-full w-[150px] lg:w-[250px] border focus:outline-none h-10 p-2"
+              className="text-sm flex-1 rounded-l-full w-[150px] lg:w-[250px] border focus:outline-none h-10 p-2 bg-slate-400 focus:bg-white"
             />
             <button className="-ml-1 h-10 rounded-r-full bg-red-600 hover:bg-red-700 text-white font-bold px-3">
               SUBSCRIBE
@@ -49,7 +52,12 @@ export default function FooterComponent() {
         </div>
         <Footer.Divider />
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-          <Footer.Copyright href="#" by="eComm" year={2024} />
+          <Footer.Copyright
+            href="#"
+            by="eComm"
+            year={2024}
+            className="text-slate-950"
+          />
           <div className="mt-4 flex flex-col lg:flex-row gap-2 sm:mt-0 items-center justify-center">
             <p className="text-sm">
               Designed & Maintained by:{" "}
@@ -61,22 +69,22 @@ export default function FooterComponent() {
               <Footer.Icon
                 href="#"
                 icon={BsFacebook}
-                className="hover:text-blue-500"
+                className="text-slate-700 hover:text-blue-500"
               />
               <Footer.Icon
                 href="#"
                 icon={BsInstagram}
-                className="hover:text-blue-500"
+                className="text-slate-700 hover:text-blue-500"
               />
               <Footer.Icon
                 href="#"
                 icon={BsTwitter}
-                className="hover:text-blue-500"
+                className="text-slate-700 hover:text-blue-500"
               />
               <Footer.Icon
                 href="#"
                 icon={BsGithub}
-                className="hover:text-blue-500"
+                className="text-slate-700 hover:text-blue-500"
               />
             </div>
           </div>

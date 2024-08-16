@@ -15,7 +15,7 @@ export default function CartTab() {
 
   return (
     <div
-      className={`fixed top-0 right-0 bg-gray-700 shadow-2xl w-96 h-full grid grid-rows-[60px_1fr_60px transform transition-transform duration-1000 z-20 ${
+      className={`fixed top-0 right-0 bg-gray-700 shadow-xl w-96 h-full grid grid-rows-[60px_1fr_50px] transform transition-transform duration-1000 z-20 ${
         statusTab === false ? "translate-x-full" : ""
       }`}
     >

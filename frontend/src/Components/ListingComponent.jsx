@@ -28,7 +28,7 @@ export default function ListingComponent(props) {
         <div className=""></div>
         <div className="flex flex-col">
           <div className="rounded-sm bg-red-500 px-1 font-semibold text-white z-10">
-            ${oldprice - price} off
+            &#x20A6; {oldprice - price} off
           </div>
           <div className="bg-red-500 h-3 w-3 rotate-45 ml-2 -mt-2"></div>
         </div>
@@ -38,9 +38,9 @@ export default function ListingComponent(props) {
       </Link>
       <p className="text-center text-sm font-semibold">{name}</p>
       <div className="flex items-center justify-between font-bold text-sm p-2">
-        <span className="text-red-500">${price}</span>
+        <span className="text-red-500">&#x20A6; {price}</span>
         <span className="text-slate-400 font-normal line-through">
-          ${oldprice}
+          &#x20A6; {oldprice}
         </span>
       </div>
       {/* <div className="w-full h-10 bg-red-600 hidden group-hover:flex text-white items-center justify-center text-sm font-semibold"> */}

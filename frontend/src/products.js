@@ -8,8 +8,8 @@ export const products = [
   {
     id: 1,
     name: "Beautiful Women Dress",
-    price: 105,
-    oldprice: 155,
+    price: 10500,
+    oldprice: 15500,
     image: image1,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam repellendus animi consequatur libero soluta voluptatum reprehenderit exercitationem corporis. Vitae molestias saepe quidem doloribus obcaecati repellendus qui animi quaerat pariatur laboriosam?",
@@ -18,8 +18,8 @@ export const products = [
   {
     id: 2,
     name: "Beautiful Men Dress",
-    price: 115,
-    oldprice: 265,
+    price: 11500,
+    oldprice: 12650,
     image: image2,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam repellendus animi consequatur libero soluta voluptatum reprehenderit exercitationem corporis. Vitae molestias saepe quidem doloribus obcaecati repellendus qui animi quaerat pariatur laboriosam?",
@@ -28,8 +28,8 @@ export const products = [
   {
     id: 3,
     name: "Beautiful Children Dress",
-    price: 205,
-    oldprice: 655,
+    price: 20500,
+    oldprice: 26550,
     image: image3,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam repellendus animi consequatur libero soluta voluptatum reprehenderit exercitationem corporis. Vitae molestias saepe quidem doloribus obcaecati repellendus qui animi quaerat pariatur laboriosam?",
@@ -38,8 +38,8 @@ export const products = [
   {
     id: 4,
     name: "Beautiful Women Hair",
-    price: 155,
-    oldprice: 195,
+    price: 15500,
+    oldprice: 19500,
     image: image4,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam repellendus animi consequatur libero soluta voluptatum reprehenderit exercitationem corporis. Vitae molestias saepe quidem doloribus obcaecati repellendus qui animi quaerat pariatur laboriosam?",
@@ -48,8 +48,8 @@ export const products = [
   {
     id: 5,
     name: "Beautiful Women Accessories",
-    price: 1105,
-    oldprice: 1565,
+    price: 11050,
+    oldprice: 15650,
     image: image5,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam repellendus animi consequatur libero soluta voluptatum reprehenderit exercitationem corporis. Vitae molestias saepe quidem doloribus obcaecati repellendus qui animi quaerat pariatur laboriosam?",
