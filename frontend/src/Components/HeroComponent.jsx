@@ -1,26 +1,34 @@
 import React from "react";
-import heroimage from "/heroimage.png";
-import { Button } from "flowbite-react";
+import { assets } from "../assets/assets";
 
 export default function HeroComponent() {
+  const date = new Date();
+
   return (
-    <div
-      className="w-full md:h-screen  p-2 lg:px-16 flex items-center"
-      style={{
-        background: `url(${heroimage}), linear-gradient(0deg, rgb(216,216,216) 40%, transparent)`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "top right",
-        backgroundSize: "contain",
-      }}
-    >
-      <div className="flex-1 flex flex-col gap-6">
-        <p className="uppercase font-semibold">August Collection</p>
-        <h1 className="text-3xl lg:text-7xl">
-          Get up to <span className="text-red-400">30%</span> Off{" "}
-          <span className="block">New Arrivals</span>
-        </h1>
-        <Button className="w-32 bg-red-600">SHOP NOW</Button>
+    <div className="flex flex-col sm:flex-row">
+      {/* hero left side */}
+      <div className="w-full sm:w-2/3 flex items-center justify-center py-10 sm:py-0">
+        <div className="text-[#414141]">
+          <div className="flex items-center gap-2">
+            <p className="w-8 md:w-full h-[2px] bg-[#414141] flex-1"></p>
+            <p className="text-sm md:text-base uppercase font-semibold">
+              {date.toLocaleString("default", { month: "long" })} bestseller
+            </p>
+          </div>
+
+          <h1 className="prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed">
+            Latest Arrivals
+          </h1>
+
+          <div className="flex items-center gap-2">
+            <p className="font-semibold text-sm md:text-base">SHOP NOW</p>
+            <p className="w-8 md:w-full h-[2px] bg-[#414141] flex-1"></p>
+          </div>
+        </div>
       </div>
+
+      {/* hero right side */}
+      <img src={assets.hero_img} className="w-full sm:w-1/2" alt="" />
     </div>
   );
 }

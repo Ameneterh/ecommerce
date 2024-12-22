@@ -1,30 +1,35 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HeaderComponent from "./Components/HeaderComponent";
+import { Button } from "antd";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
-import ShopPage from "./Pages/ShopPage";
-import PromotionPage from "./Pages/PromotionPage";
-import BlogPage from "./Pages/BlogPage";
+import AboutPage from "./pages/AboutPage";
+import AuthenticationPage from "./pages/AuthenticationPage";
+import Cart from "./pages/Cart";
+import CollectionsPage from "./pages/CollectionsPage";
 import ContactPage from "./Pages/ContactPage";
-import MainLayout from "./Components/MainLayout";
-import ProductDetail from "./Pages/ProductDetail";
+import OrdersPage from "./pages/OrdersPage";
+import PlaceOrder from "./pages/PlaceOrder";
+import ProductPage from "./pages/ProductPage";
+import HeaderComponent from "./Components/HeaderComponent";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <BrowserRouter>
+    <div className="">
+      {/* <HeaderComponent /> */}
       <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/:slug" element={<ProductDetail />} />
-          <Route path="/promotion" element={<PromotionPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/authentication" element={<AuthenticationPage />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/collections" element={<CollectionsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/place-order" element={<PlaceOrder />} />
+        <Route path="/product/:productId" element={<ProductPage />} />
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 
