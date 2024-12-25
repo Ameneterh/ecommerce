@@ -4,9 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#003060",
+        primary: "#002D62",
       },
     },
   },
   plugins: [],
+  corePlugins: {
+    preflight: false,
+  },
 };

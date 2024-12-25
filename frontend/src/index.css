@@ -7,13 +7,8 @@
 * {
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-family: "Outfit", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+  box-sizing: border-box;
+  font-family: "Outfit", serif !important;
 }
 
 .prata-regular {
@@ -24,16 +19,28 @@ body {
 
 a {
   text-decoration: none;
-  color: rgb(61, 61, 61);
 }
 
 a.active hr {
   display: block;
 }
 
-@media (max-width: 640px) {
-  a.active {
-    background-color: black;
-    color: white;
-  }
+input,
+select {
+  height: 40px !important;
+  width: 100% !important;
+  border: 1px solid #b9b9b9 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  border: 1px solid #b9b9b9 !important;
+  box-shadow: none !important;
+}
+
+button {
+  height: 42px !important;
+  box-shadow: none !important;
 }

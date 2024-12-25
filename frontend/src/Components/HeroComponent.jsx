@@ -1,5 +1,7 @@
 import React from "react";
 import { assets } from "../assets/assets";
+import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 export default function HeroComponent() {
   const date = new Date();
@@ -7,7 +9,7 @@ export default function HeroComponent() {
   return (
     <div className="flex flex-col sm:flex-row">
       {/* hero left side */}
-      <div className="w-full sm:w-2/3 flex items-center justify-center py-10 sm:py-0">
+      <div className="w-full sm:w-2/3 flex items-center justify-center pb-10 sm:py-0">
         <div className="text-[#414141]">
           <div className="flex items-center gap-2">
             <p className="w-8 md:w-full h-[2px] bg-[#414141] flex-1"></p>
@@ -20,9 +22,17 @@ export default function HeroComponent() {
             Latest Arrivals
           </h1>
 
-          <div className="flex items-center gap-2">
-            <p className="font-semibold text-sm md:text-base">SHOP NOW</p>
-            <p className="w-8 md:w-full h-[2px] bg-[#414141] flex-1"></p>
+          <p className="my-2 text-xl text-center capitalize">
+            We picked every item with care just for you,{" "}
+            <span className="block">
+              <b>you must try</b> at least once
+            </span>
+          </p>
+          {/* <p className="w-8 md:w-full h-[2px] bg-[#414141] flex-1"></p> */}
+          <div className="flex items-center gap-2 mt-5">
+            <Button to="/collections" type="primary" htmlType="submit" block>
+              SHOP NOW
+            </Button>
           </div>
         </div>
       </div>

@@ -1,14 +1,50 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { MdArrowForwardIos } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
 import { assets } from "../assets/assets";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/shopContext";
+import { GetCurrentUser } from "../apiCalls/users";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/userSlice.js";
+import { setLoader } from "../redux/loaderSlice";
+import { Button } from "antd";
 
 export default function HeaderComponent() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const { setShowSearch } = useContext(ShopContext);
+  const { user } = useSelector((state) => state.users);
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
+
+  const validateToken = async () => {
+    try {
+      dispatch(setLoader(true));
+      const response = await GetCurrentUser();
+      dispatch(setLoader(false));
+
+      if (response.success) {
+        dispatch(setUser(response.data));
+      } else {
+        message.error(response.message);
+      }
+    } catch (error) {
+      dispatch(setLoader(false));
+      message.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      validateToken();
+    }
+  }, []);
+
+  const handleLogout = async () => {
+    localStorage.removeItem("token");
+    // navigate("/login");
+  };
 
   return (
     <div className="flex items-center justify-between py-5 px-2 font-medium sticky top-0 z-40 text-[12px] bg-white border-b">
@@ -43,29 +79,45 @@ export default function HeaderComponent() {
           className="text-xl cursor-pointer"
         />
 
-        <div className="group relative">
-          <img src="./site_logo.png" className="w-8 cursor-pointer" />
-          <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
-            <div className="flex flex-col gap-2 w-36 py-3 px-3 bg-slate-100 text-gray-500 rounded">
-              <p className="cursor-pointer hover:text-black p-1 hover:bg-slate-200 rounded">
-                Profile
-              </p>
-              <p className="cursor-pointer hover:text-black p-1 hover:bg-slate-200 rounded">
-                Orders
-              </p>
-              <p className="cursor-pointer hover:text-black p-1 hover:bg-slate-200 rounded">
-                Logout
-              </p>
+        {user ? (
+          <div className="group relative">
+            <img src={user.avatar} className="w-10 cursor-pointer" />
+            <div className="group-hover:block hidden absolute dropdown-menu right-0 bg-gray-50 overflow-hidden">
+              <div className="p-2 font-normal">
+                <p>{user.fullname}</p>
+                <p className="text-blue-600">@{user.email}</p>
+              </div>
+              <div className="flex flex-col gap-2 w-full p-1 bg-gray-700 text-white rounded">
+                <p
+                  onClick={() => navigate("/seller-profile")}
+                  className="cursor-pointer hover:text-black p-1 hover:bg-slate-200"
+                >
+                  Profile
+                </p>
+                <p
+                  onClick={() => handleLogout()}
+                  className="cursor-pointer hover:text-black p-1 hover:bg-slate-200"
+                >
+                  Logout
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div
+            onClick={() => navigate("/login")}
+            className="bg-blue-500 rounded px-4 py-1 text-lg text-white cursor-pointer"
+          >
+            Login
+          </div>
+        )}
 
-        <Link to={"/cart"} className="relative">
+        {/* <Link to={"/cart"} className="relative">
           <FaShoppingCart className="text-xl text-black" />
           <p className="absolute -right-2 -top-2 w-4 text-center leading-4 bg-red-700 text-white aspect-square rounded-full text-[8px]">
-            10
+            {getCartCount()}
           </p>
-        </Link>
+        </Link> */}
 
         <FiMenu
           className="text-xl cursor-pointer sm:hidden"

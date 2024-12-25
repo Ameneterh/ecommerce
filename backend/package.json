@@ -9,6 +9,7 @@
   },
   "author": "Amene Ter'Hemen",
   "license": "ISC",
+  "proxy": "http://localhost:5000",
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
