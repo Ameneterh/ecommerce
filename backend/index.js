@@ -1,4 +1,5 @@
 import userRouter from "./routes/user.route.js";
+import productRouter from "./routes/product.route.js";
 import express from "express";
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -18,5 +19,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/backend/users", userRouter);
+app.use("/backend/products", productRouter);
 
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));

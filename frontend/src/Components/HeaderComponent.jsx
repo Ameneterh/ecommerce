@@ -43,7 +43,7 @@ export default function HeaderComponent() {
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
-    // navigate("/login");
+    window.location.href = "/";
   };
 
   return (
@@ -89,7 +89,13 @@ export default function HeaderComponent() {
               </div>
               <div className="flex flex-col gap-2 w-full p-1 bg-gray-700 text-white rounded">
                 <p
-                  onClick={() => navigate("/seller-profile")}
+                  onClick={() => {
+                    if (user.role === "user") {
+                      navigate("/seller-profile");
+                    } else {
+                      navigate("/admin-dashboard");
+                    }
+                  }}
                   className="cursor-pointer hover:text-black p-1 hover:bg-slate-200"
                 >
                   Profile

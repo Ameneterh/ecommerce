@@ -32,3 +32,26 @@ export const GetCurrentUser = async () => {
     return error.message;
   }
 };
+
+// get all users
+export const GetAllUsers = async () => {
+  try {
+    const response = await axiosInstance.get("/backend/users/get-users");
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+// update user status
+export const UpdateUserStatus = async (status, id) => {
+  try {
+    const response = await axiosInstance.put(
+      `/backend/users/update-user-status/${id}`,
+      { status }
+    );
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};

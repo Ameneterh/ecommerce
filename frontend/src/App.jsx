@@ -15,6 +15,7 @@ import ProtectedPage from "./components/ProtectedPage";
 import Spinner from "./components/Spinner";
 import { useSelector } from "react-redux";
 import SellerProfilePage from "./pages/SellerProfilePage";
+import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
@@ -42,6 +43,14 @@ function App() {
             element={
               <ProtectedPage>
                 <SellerProfilePage />
+              </ProtectedPage>
+            }
+          />
+          <Route
+            path="/admin-dashboard"
+            element={
+              <ProtectedPage>
+                <AdminDashboard />
               </ProtectedPage>
             }
           />

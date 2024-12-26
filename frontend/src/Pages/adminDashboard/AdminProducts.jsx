@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
-import SellerProductForm from "./SellerProductForm";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../../redux/loaderSlice";
-import { DeleteProduct, GetProducts } from "../../apiCalls/products";
+import { GetProducts, UpdateProductStatus } from "../../apiCalls/products";
 
-export default function SellerProducts() {
+export default function AdminProducts() {
   const [showProductForm, setShowProductForm] = useState(false);
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -19,10 +18,27 @@ export default function SellerProducts() {
   const getData = async () => {
     try {
       dispatch(setLoader(true));
-      const response = await GetProducts({ seller: user._id });
+      const response = await GetProducts(null);
       dispatch(setLoader(false));
       if (response.success) {
         setProducts(response.products);
+      }
+    } catch (error) {
+      dispatch(setLoader(false));
+      message.error(error.message);
+    }
+  };
+
+  const onStatusUpdate = async (status, id) => {
+    try {
+      dispatch(setLoader(true));
+      const response = await UpdateProductStatus(status, id);
+      dispatch(setLoader(false));
+      if (response.success) {
+        message.success(response.message);
+        getData();
+      } else {
+        throw new Error(response.message);
       }
     } catch (error) {
       dispatch(setLoader(false));
@@ -34,32 +50,28 @@ export default function SellerProducts() {
     getData();
   }, []);
 
-  const deleteProduct = async (id) => {
-    try {
-      dispatch(setLoader(true));
-      const response = await DeleteProduct(id);
-      dispatch(setLoader(false));
-
-      if (response.success) {
-        message.success(response.message);
-        getData();
-      } else {
-        message.error(response.message);
-      }
-    } catch (error) {
-      dispatch(setLoader(false));
-      message.error(error.message);
-    }
-  };
-
   const columns = [
     {
       title: "Product Name",
       dataIndex: "product_name",
     },
     {
+      title: "Seller",
+      dataIndex: "name",
+      render: (text, record) => {
+        return record.seller.fullname;
+      },
+    },
+    {
       title: "Product Description",
       dataIndex: "product_description",
+      render: (text, record) => {
+        return (
+          <div className="max-w-4xl line-clamp-3">
+            {record.product_description}
+          </div>
+        );
+      },
     },
     {
       title: "Category",
@@ -72,6 +84,9 @@ export default function SellerProducts() {
     {
       title: "Status",
       dataIndex: "status",
+      render: (text, record) => {
+        return record.status.toUpperCase();
+      },
     },
     {
       title: "Added On",
@@ -79,23 +94,46 @@ export default function SellerProducts() {
       render: (text, record) =>
         moment(record.createdAt).format("DD/MM/YYYY hh:mm A"),
     },
+
     {
       title: "Action",
       dataIndex: "action",
       render: (text, record) => {
+        const { status, _id } = record;
         return (
-          <div className="flex gap-5">
-            <MdDeleteForever
-              onClick={() => deleteProduct(record._id)}
-              className="h-5 w-5 cursor-pointer text-red-600"
-            />
-            <CiEdit
-              onClick={() => {
-                setSelectedProduct(record);
-                setShowProductForm(true);
-              }}
-              className="h-5 w-5 cursor-pointer text-green-600"
-            />{" "}
+          <div className="flex gap-3">
+            {status === "pending" && (
+              <span
+                onClick={() => onStatusUpdate("approved", _id)}
+                className="underline cursor-pointer text-green-700"
+              >
+                Approve
+              </span>
+            )}
+            {status === "pending" && (
+              <span
+                onClick={() => onStatusUpdate("rejected", _id)}
+                className="underline cursor-pointer text-orange-700"
+              >
+                Reject
+              </span>
+            )}
+            {status === "approved" && (
+              <span
+                onClick={() => onStatusUpdate("blocked", _id)}
+                className="underline cursor-pointer text-red-700"
+              >
+                Block
+              </span>
+            )}
+            {status === "blocked" && (
+              <span
+                onClick={() => onStatusUpdate("approved", _id)}
+                className="underline cursor-pointer text-green-700"
+              >
+                Unblock
+              </span>
+            )}
           </div>
         );
       },
@@ -104,30 +142,8 @@ export default function SellerProducts() {
 
   return (
     <div>
-      <div className="flex justify-end mb-4">
-        <Button
-          onClick={() => {
-            setSelectedProduct(null);
-            setShowProductForm(true);
-          }}
-          type="default"
-        >
-          Add Product
-        </Button>
-      </div>
-
       {/* table to show products */}
       <Table columns={columns} dataSource={products} scroll={{ x: 400 }} />
-
-      {/* call product form */}
-      {showProductForm && (
-        <SellerProductForm
-          showProductForm={showProductForm}
-          setShowProductForm={setShowProductForm}
-          selectedProduct={selectedProduct}
-          getData={getData}
-        />
-      )}
     </div>
   );
 }

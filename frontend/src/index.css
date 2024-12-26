@@ -44,3 +44,8 @@ button {
   height: 42px !important;
   box-shadow: none !important;
 }
+
+table {
+  border: #b9b9b9 1px solid !important;
+  border-radius: 3px;
+}
