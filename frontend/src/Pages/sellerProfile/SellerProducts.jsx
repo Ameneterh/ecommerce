@@ -7,8 +7,11 @@ import SellerProductForm from "./SellerProductForm";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../../redux/loaderSlice";
 import { DeleteProduct, GetProducts } from "../../apiCalls/products";
+import BidsComponent from "./BidsComponent";
 
+// products from tutorial
 export default function SellerProducts() {
+  const [showBids, setShowBids] = useState(false);
   const [showProductForm, setShowProductForm] = useState(false);
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -22,7 +25,7 @@ export default function SellerProducts() {
       const response = await GetProducts({ seller: user._id });
       dispatch(setLoader(false));
       if (response.success) {
-        setProducts(response.products);
+        setProducts(response.data);
       }
     } catch (error) {
       dispatch(setLoader(false));
@@ -56,10 +59,24 @@ export default function SellerProducts() {
     {
       title: "Product Name",
       dataIndex: "product_name",
+      render: (text, record) => {
+        return (
+          <div className="max-w-[100px] line-clamp-2">
+            {record.product_name}
+          </div>
+        );
+      },
     },
     {
       title: "Product Description",
       dataIndex: "product_description",
+      render: (text, record) => {
+        return (
+          <div className="max-w-[300px] line-clamp-3">
+            {record.product_description}
+          </div>
+        );
+      },
     },
     {
       title: "Category",
@@ -76,15 +93,20 @@ export default function SellerProducts() {
     {
       title: "Added On",
       dataIndex: "createdAt",
-      render: (text, record) =>
-        moment(record.createdAt).format("DD/MM/YYYY hh:mm A"),
+      render: (text, record) => {
+        return (
+          <div className="max-w-[100px]">
+            {moment(record.createdAt).format("DD/MM/YYYY hh:mm A")}
+          </div>
+        );
+      },
     },
     {
       title: "Action",
       dataIndex: "action",
       render: (text, record) => {
         return (
-          <div className="flex gap-5">
+          <div className="flex gap-5 items-center">
             <MdDeleteForever
               onClick={() => deleteProduct(record._id)}
               className="h-5 w-5 cursor-pointer text-red-600"
@@ -96,6 +118,15 @@ export default function SellerProducts() {
               }}
               className="h-5 w-5 cursor-pointer text-green-600"
             />{" "}
+            <span
+              className="cursor-pointer text-blue-700 underline underline-offset-2"
+              onClick={() => {
+                setSelectedProduct(record);
+                setShowBids(true);
+              }}
+            >
+              Show Bids
+            </span>
           </div>
         );
       },
@@ -126,6 +157,15 @@ export default function SellerProducts() {
           setShowProductForm={setShowProductForm}
           selectedProduct={selectedProduct}
           getData={getData}
+        />
+      )}
+
+      {/* new bids placement modal */}
+      {showBids && (
+        <BidsComponent
+          showBidsModal={showBids}
+          setShowBidsModal={setShowBids}
+          selectedProduct={selectedProduct}
         />
       )}
     </div>

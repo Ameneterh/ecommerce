@@ -12,7 +12,7 @@
 }
 
 .prata-regular {
-  font-family: "Prata", serif;
+  font-family: "Prata", serif !important;
   font-weight: 400;
   font-style: normal;
 }
@@ -48,4 +48,8 @@ button {
 table {
   border: #b9b9b9 1px solid !important;
   border-radius: 3px;
+}
+
+.max-width {
+  max-width: max-content !important;
 }

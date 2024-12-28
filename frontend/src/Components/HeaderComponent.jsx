@@ -47,7 +47,7 @@ export default function HeaderComponent() {
   };
 
   return (
-    <div className="flex items-center justify-between py-5 px-2 font-medium sticky top-0 z-40 text-[12px] bg-white border-b">
+    <div className="flex items-center justify-between py-5 px-2 font-medium sticky top-0 z-40 text-[12px] bg-white border-t-0 border-l-0 border-r-0 border-b-[1.5px] border-solid border-b-gray-300">
       <Link to="/">
         <img src={assets.nav_img} className="w-36 sm:w-56" />
       </Link>
@@ -74,14 +74,19 @@ export default function HeaderComponent() {
 
       {/* user login, search, and cart */}
       <div className="flex items-center gap-3 sm:gap-6">
-        <FaSearch
+        {/* <FaSearch
           onClick={() => setShowSearch(true)}
           className="text-xl cursor-pointer"
-        />
+        /> */}
 
         {user ? (
           <div className="group relative">
-            <img src={user.avatar} className="w-10 cursor-pointer" />
+            <div className="relative">
+              <img src={user.avatar} className="w-10 cursor-pointer" />
+              <p className="absolute right-0 bottom-1 w-4 text-center leading-4 bg-red-600 text-white rounded-full">
+                10
+              </p>
+            </div>
             <div className="group-hover:block hidden absolute dropdown-menu right-0 bg-gray-50 overflow-hidden">
               <div className="p-2 font-normal">
                 <p>{user.fullname}</p>

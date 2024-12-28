@@ -1,59 +1,118 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaStar, FaStarHalf } from "react-icons/fa6";
+import { Tooltip } from "react-tooltip";
+import {
+  FaStar,
+  FaStarHalf,
+  FaSquareWhatsapp,
+  FaRegFaceSadTear,
+} from "react-icons/fa6";
+import { MdAddIcCall, MdCall } from "react-icons/md";
+import { AiOutlineProduct } from "react-icons/ai";
 import MainLayout from "../layout/MainLayout";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ShopContext } from "../context/shopContext";
 import RelatedProducts from "../components/RelatedProducts";
+import { GetAllBids, GetProductById, GetProducts } from "../apiCalls/products";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoader } from "../redux/loaderSlice";
+import moment from "moment";
+import { Button, message } from "antd";
+import BidsModal from "./sellerProfile/BidsModal";
+import BidsComponent from "./sellerProfile/BidsComponent";
 
 export default function ProductPage() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.users);
+
+  const [product, setProduct] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [showAddBidsModal, setShowAddBidsModal] = useState(false);
+
   const { productId } = useParams();
-  const { products, currency, addToCart } = useContext(ShopContext);
-  const [productData, setProductData] = useState(false);
+  const { currency, addToCart } = useContext(ShopContext);
   const [image, setImage] = useState("");
   const [size, setSize] = useState("");
 
-  const fetchProductData = async () => {
-    products.map((item) => {
-      if (item._id === productId) {
-        setProductData(item);
-        setImage(item.image[0]);
-        return null;
+  console.log(product);
+
+  const getData = async () => {
+    try {
+      dispatch(setLoader(true));
+      const response = await GetProductById(productId);
+      dispatch(setLoader(false));
+
+      if (response.success) {
+        const bidsResponse = await GetAllBids({ product: productId });
+        setProduct({ ...response.data, bids: bidsResponse.data });
       }
-    });
+    } catch (error) {
+      dispatch(setLoader(false));
+      message.error(error.message);
+    }
   };
 
   useEffect(() => {
-    fetchProductData();
-  }, [productId]);
+    getData();
+  }, []);
 
   return (
     <MainLayout>
-      {productData ? (
-        <div className="transition-opacity ease-in duration-500 opacity-100 mt-4">
-          {/* product data */}
-          <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
+      {product ? (
+        <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* product images */}
-            <div className="sm:h-[500px] flex-1 flex flex-col-reverse gap-3 sm:flex-row">
-              <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:w-[18.7%] w-full">
-                {productData.image.map((item, index) => (
-                  <img
-                    onClick={() => setImage(item)}
-                    src={item}
-                    key={index}
-                    alt=""
-                    className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer rounded-md h-[22%] border"
-                  />
-                ))}
+            <div className="flex flex-col gap-2">
+              <img
+                src={product.images[selectedImageIndex]}
+                alt=""
+                className="w-full h-96 object-cover rounded-md border border-solid border-gray-300"
+              />
+
+              <div className="flex gap-2 p-2 bg-black bg-opacity-20 mt-2 rounded">
+                {product.images.map((image, index) => {
+                  return (
+                    <img
+                      // onClick={() => setImage(image)}
+                      src={image}
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`w-20 h-20 object-cover cursor-pointer rounded-md border border-solid border-gray-300
+                        ${
+                          selectedImageIndex === index
+                            ? "border-4 border-red-700 border-solid p-1 bg-white"
+                            : ""
+                        }
+                    `}
+                    />
+                  );
+                })}
               </div>
-              <div className="flex items-center w-full sm:w-[80%] overflow-hidden border rounded">
-                <img src={image} alt="" className="w-full h-auto" />
+              <div className="flex items-center gap-1">
+                <h1 className="text-sm text-gray-900">Added on</h1>
+                <span className="text-xs text-gray-700">
+                  {moment(product.createdAt).format("MMM DD, YYYY")} at{" "}
+                  {moment(product.createdAt).format("hh:mm A")}
+                </span>
               </div>
             </div>
+
             {/* product information */}
             <div className="flex-1">
-              <h1 className="font-medium text-2xl mt-2">{productData.name}</h1>
+              <div className="flex flex-col gap-1">
+                <h1 className="font-medium text-2xl text-blue-950">
+                  {product.product_name}
+                </h1>
+                <hr className="h-[1.5px] flex-1 my-1" />
+                <p className="text-gray-500 text-sm">
+                  {product.product_description}
+                </p>
+              </div>
 
-              <div className="flex items-center gap-1 mt-2 text-xl text-orange-500">
+              {/* product details */}
+              <hr className="my-3" />
+              <h1 className="text-xl text-blue-950">Product Details</h1>
+              <div className="flex items-center gap-1 mt-5 text-xl text-orange-500">
                 <FaStar />
                 <FaStar />
                 <FaStar />
@@ -61,44 +120,129 @@ export default function ProductPage() {
                 <FaStar className="text-gray-500" />
                 <p className="text-sm text-gray-400 ml-2">(122)</p>
               </div>
-              <p className="flex items-center mt-5 text-xl font-medium">
-                {currency}
-                {productData.price}
+              <p className="flex items-center gap-5 mt-5">
+                <div className="flex flex-col">
+                  <span className="text-sm -mb-1">Asking Price:</span>
+                  <div className="flex items-center  text-xl font-medium">
+                    {currency}
+                    {product.asking_price.toLocaleString()}
+                  </div>
+                </div>
+
+                <span className="p-2 rounded bg-green-500 text-white text-xs font-medium">
+                  {product.deliveryincluded
+                    ? "Shipping Included"
+                    : "Shipping Not Included"}
+                </span>
               </p>
 
-              <p className="mt-5 text-gray-500 text-sm">
-                {productData.description}
-              </p>
-
-              <div className="flex flex-col gap-4 my-8">
-                <p>Select Product Size</p>
-                <div className="flex gap-2">
-                  {productData.sizes.map((item, index) => (
-                    <button
-                      onClick={() => setSize(item)}
-                      className={`border py-2 px-4 bg-gray-100 rounded ${
-                        item === size ? "border-orange-500" : ""
-                      }`}
-                      key={index}
-                    >
-                      {item}
-                    </button>
-                  ))}
+              <div className="flex flex-col text-gray-700 mt-3 text-sm">
+                <div className="grid grid-cols-2">
+                  <p>Category:</p>
+                  <p className="capitalize">{product.category}</p>
+                </div>
+                <div className="grid grid-cols-2">
+                  <p>Sub Category:</p>
+                  <p className="capitalize">{product.sub_category}</p>
+                </div>
+                <div className="grid grid-cols-2">
+                  <p>Pay on Delivery:</p>
+                  <p className="capitalize">
+                    {product.sub_category ? "Yes" : "No"}
+                  </p>
                 </div>
               </div>
 
-              <button
-                onClick={() => addToCart(productData._id, size)}
-                className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 rounded hover:bg-gray-800"
-              >
-                ADD TO CART
-              </button>
+              {/* seller details */}
+              <hr className="my-3" />
+              <div className="text-sm text-gray-500 flex flex-col gap-1">
+                <h1 className="text-xl text-blue-950">Seller Details</h1>
+                <div className="grid grid-cols-2">
+                  <p>Name of Seller:</p>
+                  <p className="capitalize">{product.seller.fullname}</p>
+                </div>
+                <div className="grid grid-cols-2">
+                  <p>Seller's Email:</p>
+                  <Link to={`mailto:${product.seller.email}`} className="">
+                    {product.seller.email}
+                  </Link>
+                </div>
+                <div className="grid grid-cols-2">
+                  <p>Seller's Phone:</p>
+                  <div className="flex gap-2">
+                    <Link
+                      to=""
+                      className="flex items-center p-1 text-blue-500 hover:bg-blue-100 gap-1 rounded"
+                    >
+                      <MdCall className="w-4 h-4" />
+                      Call
+                    </Link>
+                    <Link
+                      to=""
+                      className="flex items-center p-1 text-green-500 hover:bg-green-50 gap-1 rounded"
+                    >
+                      <FaSquareWhatsapp className="w-4 h-4" />
+                      WhatsApp
+                    </Link>
+                  </div>
+                </div>
+              </div>
 
-              <hr className="mt-8 sm:w-4/5" />
-              <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
-                <p>100% Original Product</p>
-                <p>Cash on Delivery is Available on this product</p>
-                <p>Easy return and exchange policy within 7 days</p>
+              {/* bids placement */}
+              <hr className="my-3" />
+              <div className="flex flex-col">
+                <div className="flex justify-between items-center mb-5">
+                  <h1 className="text-xl text-blue-950">BIDS PLACEMENT</h1>
+                  <Button
+                    type="default"
+                    onClick={() => setShowAddBidsModal(true)}
+                    disabled={!user || user._id === product.seller._id}
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content="Login to Bid!"
+                  >
+                    PLACE BID
+                  </Button>
+                  {!user ? <Tooltip id="my-tooltip" /> : ""}
+                </div>
+
+                {/* show bids on product page */}
+                {product.showBidsOnProductsPage &&
+                  product.bids.map((bid, index) => {
+                    return (
+                      <div className="border border-gray-300 border-solid p-2 rounded bg-gray-50">
+                        <div className="grid grid-cols-3 text-gray-700 text-sm">
+                          <span>Name of Bidder:</span>
+                          <span className="font-bold">
+                            {bid.buyer.fullname}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-3 text-gray-600 text-sm">
+                          <span>Amount Bidded:</span>
+                          <span className="font-bold flex items-center">
+                            {currency}
+                            {bid.bidAmount.toLocaleString()}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-3 text-gray-600 text-sm">
+                          <span>Date Bidded:</span>
+                          <span className="font-bold flex items-center">
+                            {moment(bid.createdAt).format(
+                              "MMM DD, YYYY, h:mm A"
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                {showAddBidsModal && (
+                  <BidsModal
+                    product={product}
+                    reloadData={getData}
+                    showBidsModal={showAddBidsModal}
+                    setShowBidsModal={setShowAddBidsModal}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -127,12 +271,17 @@ export default function ProductPage() {
 
           {/* display related products */}
           <RelatedProducts
-            category={productData.category}
-            subCategory={productData.subCategory}
+            category={product.category}
+            subCategory={product.sub_category}
           />
         </div>
       ) : (
-        <div className="text-center">No product match found</div>
+        <div className="flex justify-center text-center min-h-screen mt-8">
+          <div className="flex flex-col items-center">
+            <FaRegFaceSadTear className="w-10 h-10" />
+            <p className="text-2xl text-orange-900 mt-4">No Match Found!</p>
+          </div>
+        </div>
       )}
     </MainLayout>
   );

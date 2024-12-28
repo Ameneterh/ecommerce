@@ -1,10 +1,11 @@
 import React from "react";
 import { assets } from "../assets/assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "antd";
 
 export default function HeroComponent() {
   const date = new Date();
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col sm:flex-row">
@@ -30,7 +31,12 @@ export default function HeroComponent() {
           </p>
           {/* <p className="w-8 md:w-full h-[2px] bg-[#414141] flex-1"></p> */}
           <div className="flex items-center gap-2 mt-5">
-            <Button to="/collections" type="primary" htmlType="submit" block>
+            <Button
+              onClick={() => navigate("/collections")}
+              type="primary"
+              htmlType="submit"
+              block
+            >
               SHOP NOW
             </Button>
           </div>

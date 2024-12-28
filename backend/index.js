@@ -1,5 +1,6 @@
 import userRouter from "./routes/user.route.js";
 import productRouter from "./routes/product.route.js";
+import bidsRouter from "./routes/bids.routes.js";
 import express from "express";
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -20,5 +21,6 @@ app.use(cookieParser());
 
 app.use("/backend/users", userRouter);
 app.use("/backend/products", productRouter);
+app.use("/backend/bids", bidsRouter);
 
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));

@@ -63,6 +63,11 @@ export default function RegistrationPage() {
             <Input placeholder="Enter your email" />
           </Form.Item>
 
+          {/* phone number input */}
+          <Form.Item label="User Phone Number" name={"phone"} rules={rules}>
+            <Input placeholder="Phone Number: 2348154230654" />
+          </Form.Item>
+
           {/* passwird input */}
           <Form.Item label="Password" name={"password"} rules={rules}>
             <div className="flex items-center">

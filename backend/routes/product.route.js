@@ -28,14 +28,26 @@ router.post("/get-products", async (req, res) => {
   try {
     const {
       seller,
-      categories = [],
-      sub_categories = [],
+      category = [],
+      sub_category = [],
       asking_price = [],
+      status,
     } = req.body;
 
     let filters = {};
     if (seller) {
       filters.seller = seller;
+    }
+    if (status) {
+      filters.status = status;
+    }
+
+    if (category.length > 0) {
+      filters.category = { $in: category };
+    }
+
+    if (sub_category.length > 0) {
+      filters.sub_category = { $in: sub_category };
     }
 
     const products = await Product.find(filters)
@@ -43,7 +55,7 @@ router.post("/get-products", async (req, res) => {
       .sort({ createdAt: -1 });
     res.send({
       success: true,
-      products,
+      data: products,
     });
   } catch (error) {
     res.send({

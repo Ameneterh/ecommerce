@@ -21,7 +21,7 @@ export default function AdminProducts() {
       const response = await GetProducts(null);
       dispatch(setLoader(false));
       if (response.success) {
-        setProducts(response.products);
+        setProducts(response.data);
       }
     } catch (error) {
       dispatch(setLoader(false));

@@ -32,6 +32,10 @@ const productSchema = new mongoose.Schema(
       default: false,
       required: true,
     },
+    showBidsOnProductsPage: {
+      type: Boolean,
+      default: false,
+    },
     images: {
       type: Array,
       default: [],

@@ -167,6 +167,28 @@ export default function SellerProductForm({
                   );
                 })}
               </div>
+
+              <Row>
+                <Col span={8}>
+                  <Form.Item
+                    label="Show Bids on Product Page"
+                    name="showBidsOnProductsPage"
+                    valuePropName="checked"
+                  >
+                    <Input
+                      type="checkbox"
+                      onChange={(e) => {
+                        formRef.current.setFieldsValue({
+                          showBidsOnProductPage: e.target.checked,
+                        });
+                      }}
+                      checked={formRef.current?.getFieldValue(
+                        "showBidsOnProductsPage"
+                      )}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane
