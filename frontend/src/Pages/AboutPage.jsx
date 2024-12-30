@@ -52,7 +52,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="text-4xl py-4">
+        <div className="text-2xl py-4">
           <TitleText text1={"why"} text2={"choose us"} />
         </div>
 
