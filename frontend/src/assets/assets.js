@@ -15,9 +15,14 @@ import hero_img from "./heroimage.png";
 import exchange_icon from "./exchange_icon.png";
 import quality_icon from "./quality_icon.png";
 import support_icon from "./support_img.png";
-import site_logo from "./site_logo.png";
+// import site_logo from "./site_logo.png";
 import about_img from "./about_img.jpg";
 import contact_img from "./contact_img.jpg";
+import exceptional_logo from "./exceptional-logo.png";
+import exclucive_offer from "./exclusive-offer.jpg";
+import support_247 from "./247-support.png";
+import wide_products from "./wide-products.jpg";
+import convenience from "./convenience.png";
 
 export const assets = {
   nav_img,
@@ -25,9 +30,14 @@ export const assets = {
   exchange_icon,
   quality_icon,
   support_icon,
-  site_logo,
+  // site_logo,
   about_img,
   contact_img,
+  exceptional_logo,
+  exclucive_offer,
+  support_247,
+  wide_products,
+  convenience,
 };
 
 export const products = [

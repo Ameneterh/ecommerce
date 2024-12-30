@@ -30,8 +30,8 @@ export default function ContactPage() {
               Our Corporate Office:
             </p>
             <p className="text-gray-500">
-              Shop 77 AB Shopping Mall, Opp Oja Oba, <br />
-              Ado-Ekiti, Ekiti State, Nigeria
+              No 80, A.A. Tor Street, Adekaa, <br />
+              Gboko-East, Gboko, Benue State.
             </p>
             <p className="text-gray-500 flex flex-col gap-1">
               <span className="flex items-center gap-1">
@@ -49,16 +49,19 @@ export default function ContactPage() {
               Follow us on Social Media:
             </p>
             <p className="flex items-center gap-2">
-              <Link to="https://www.facebook.com">
+              <Link to="https://www.facebook.com/ameneng" target="_blank">
                 <FaFacebookSquare className="text-2xl text-blue-800 hover:scale-125 transition-all duration-300" />
               </Link>
-              <Link to="https://instagram.com">
+              <Link to="https://instagram.com/ameneterh" target="_blank">
                 <FaInstagramSquare className="text-2xl text-blue-800 hover:scale-125 transition-all duration-300" />
               </Link>
-              <Link to="https://linkedin.com">
+              <Link
+                to="https://www.linkedin.com/in/terhemen-amene-53b77293/"
+                target="_blank"
+              >
                 <FaLinkedin className="text-2xl text-blue-800 hover:scale-125 transition-all duration-300" />
               </Link>
-              <Link to="https://twitter.com">
+              <Link to="https://twitter.com/Ameneterh" target="_blank">
                 <FaTwitterSquare className="text-2xl text-blue-800 hover:scale-125 transition-all duration-300" />
               </Link>
             </p>

@@ -12,41 +12,48 @@ export default function AboutPage() {
           <TitleText text1={"about"} text2={"us"} />
         </div>
 
-        <div className="flex-1 my-10 flex flex-col md:flex-row gap-16">
+        <div className="my-10 flex flex-col md:flex-row gap-5 sm:gap-16">
           <img
             src={assets.about_img}
             alt=""
-            className="w-full md:max-w-[480px] h-auto rounded-lg"
+            className="md:max-w-[480px] sm:h-[300px] rounded-lg"
           />
           <div className="flex flex-col justify-center gap-6 md:w-2/4 text-gray-800 text-sm">
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
-              optio excepturi itaque minima ullam cumque harum voluptatibus
-              magni facere alias. Amet, quisquam. Sapiente obcaecati repudiandae
-              voluptates cupiditate minus illo facilis.
+              Welcome to <b>myeShop,</b> your one-stop online destination for
+              all your shopping needs! We offer a wide range of high-quality
+              products, from trendy fashion and accessories to cutting-edge
+              electronics and home essentials and consumer products. With a
+              user-friendly shopping experience, secure payment options, and
+              fast delivery, we make shopping easier and more enjoyable. Explore
+              our collection today and find exactly what you're looking for –
+              all at great prices!
             </p>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Reiciendis nihil dolorum blanditiis quasi corporis quidem id nisi
-              eius inventore accusamus impedit enim, minima error! Minus totam
-              saepe nulla. Obcaecati, iste?
+              Discover a world of convenience and quality at your fingertips.
+              Whether you're looking for the latest fashion, electronics, home
+              essentials, or unique gifts, our e-shop has it all. Enjoy
+              hassle-free shopping, secure payment options, and fast delivery,
+              all from the comfort of your home.
             </p>
 
             <Divider />
             <div className="flex flex-col gap-4">
               <b className="">Our Mission</b>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repudiandae quaerat illo quam. Blanditiis reiciendis incidunt
-                quos perspiciatis quam eos earum!
+                To provide a seamless and enjoyable online shopping experience,
+                by providing an easy to use platform for both vendors and
+                shoppers, committed to delivering exceptional customer service,
+                ensuring fast and reliable delivery, and fostering a secure,
+                convenient shopping environment for all our clients.
               </p>
             </div>
             <div className="flex flex-col gap-4">
               <b className="">Our Vision</b>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repudiandae quaerat illo quam. Blanditiis reiciendis incidunt
-                quos perspiciatis quam eos earum!
+                To become the leading online shopping destination, known for
+                exceptional customer experiences, diverse product offerings, and
+                innovative solutions.
               </p>
             </div>
           </div>
@@ -56,33 +63,46 @@ export default function AboutPage() {
           <TitleText text1={"why"} text2={"choose us"} />
         </div>
 
-        <div className="flex flex-col md:flex-row text-sm mb-20">
-          <div className="border border-gray-700 border-solid px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
+        <div className="flex flex-col items-center justify-center md:grid grid-cols-5 text-sm mb-20">
+          <div className="p-8 flex flex-col items-center gap-3">
+            <img
+              src={assets.convenience}
+              alt=""
+              className="w-20 rounded-full"
+            />
             <b>Convenience:</b>
-            <p className="text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-              reiciendis temporibus asperiores sunt earum excepturi sit expedita
-              illum, cum inventore magni incidunt blanditiis distinctio. Dolor
-              accusamus iusto est doloribus numquam.
-            </p>
           </div>
-          <div className="border border-gray-700 border-solid px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
+          <div className="p-8 flex flex-col items-center gap-3">
+            <img
+              src={assets.support_247}
+              alt=""
+              className="w-20 rounded-full"
+            />
             <b>With you 24/7:</b>
-            <p className="text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-              reiciendis temporibus asperiores sunt earum excepturi sit expedita
-              illum, cum inventore magni incidunt blanditiis distinctio. Dolor
-              accusamus iusto est doloribus numquam.
-            </p>
           </div>
-          <div className="border border-gray-700 border-solid px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
+          <div className="p-8 flex flex-col items-center gap-3">
+            <img
+              src={assets.exceptional_logo}
+              alt=""
+              className="w-20 rounded-full"
+            />
             <b>Exceptional Satisfaction:</b>
-            <p className="text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-              reiciendis temporibus asperiores sunt earum excepturi sit expedita
-              illum, cum inventore magni incidunt blanditiis distinctio. Dolor
-              accusamus iusto est doloribus numquam.
-            </p>
+          </div>
+          <div className="p-8 flex flex-col items-center gap-3">
+            <img
+              src={assets.wide_products}
+              alt=""
+              className="w-20 rounded-full"
+            />
+            <b>Wide Product Selection:</b>
+          </div>
+          <div className="p-8 flex flex-col items-center gap-3">
+            <img
+              src={assets.exclucive_offer}
+              alt=""
+              className="w-20 rounded-full"
+            />
+            <b>Exclusive Deals & Discounts:</b>
           </div>
         </div>
       </section>
