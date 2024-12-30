@@ -1,16 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./Pages/HomePage";
-// import AboutPage from "./pages/AboutPage";
-import CollectionsPage from "./pages/CollectionsPage";
-import ContactPage from "./Pages/ContactPage";
-import ProductPage from "./pages/ProductPage";
-import LoginPage from "./pages/LoginPage";
-import RegistrationPage from "./pages/RegistrationPage";
-import ProtectedPage from "./components/ProtectedPage";
-import Spinner from "./components/Spinner";
-import { useSelector } from "react-redux";
-import SellerProfilePage from "./pages/SellerProfilePage";
-import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
+import HomePage from "./Pages/HomePage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
+import CollectionsPage from "./pages/CollectionsPage.jsx";
+import ContactPage from "./Pages/ContactPage.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import RegistrationPage from "./pages/RegistrationPage.jsx";
+import ProtectedPage from "./components/ProtectedPage.jsx";
+import Spinner from "./components/Spinner.jsx";
+import { useSelector } from "react-redux.jsx";
+import SellerProfilePage from "./pages/SellerProfilePage.jsx";
+import AdminDashboard from "./pages/adminDashboard/AdminDashboard.jsx";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
@@ -22,7 +22,7 @@ function App() {
         <Routes>
           {/* unprotected routes */}
           <Route path="/" element={<HomePage />} />
-          {/* <Route path="/about" element={<AboutPage />} /> */}
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/collections" element={<CollectionsPage />} />
