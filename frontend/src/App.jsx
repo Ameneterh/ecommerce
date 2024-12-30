@@ -8,9 +8,9 @@ import LoginPage from "./pages/LoginPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage.jsx";
 import ProtectedPage from "./components/ProtectedPage.jsx";
 import Spinner from "./components/Spinner.jsx";
-import { useSelector } from "react-redux";
 import SellerProfilePage from "./pages/SellerProfilePage.jsx";
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard.jsx";
+import { useSelector } from "react-redux";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
