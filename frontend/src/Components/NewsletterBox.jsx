@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Form, Input } from "antd";
 
 export default function NewsletterBox() {
   const onSubmitHandler = (event) => {
@@ -14,23 +15,23 @@ export default function NewsletterBox() {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
         quibusdam tempore veniam odio
       </p>
-      <form
+      <Form
         onSubmit={onSubmitHandler}
-        className="w-full sm:w-1/2 flex items-center gap-3 mx-auto my-6 border pl-3"
+        className="w-full sm:w-1/2 flex items-center mx-auto my-6 border pl-3"
       >
-        <input
+        <Input
           type="email"
           placeholder="Enter your email"
           required
-          className="w-full sm:flex-1 outline-none"
+          className="w-full sm:flex-1 outline-none rounded-l-full rounded-r-none"
         />
-        <button
-          type="submit"
-          className="bg-black text-white text-xs px-10 py-4"
+        <Button
+          type="primary"
+          className="text-xs px-10 py-4 rounded-l-none rounded-r-full"
         >
           SUBSCRIBE
-        </button>
-      </form>
+        </Button>
+      </Form>
     </div>
   );
 }

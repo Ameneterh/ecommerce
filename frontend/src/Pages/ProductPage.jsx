@@ -31,10 +31,8 @@ export default function ProductPage() {
 
   const { productId } = useParams();
   const { currency, addToCart } = useContext(ShopContext);
-  const [image, setImage] = useState("");
-  const [size, setSize] = useState("");
-
-  console.log(product);
+  // const [image, setImage] = useState("");
+  // const [size, setSize] = useState("");
 
   const getData = async () => {
     try {
@@ -209,7 +207,10 @@ export default function ProductPage() {
                 {product.showBidsOnProductsPage &&
                   product.bids.map((bid, index) => {
                     return (
-                      <div className="border border-gray-300 border-solid p-2 rounded bg-gray-50">
+                      <div
+                        key={index}
+                        className="border border-gray-300 border-solid p-2 rounded bg-gray-50 mt-1"
+                      >
                         <div className="grid grid-cols-3 text-gray-700 text-sm">
                           <span>Name of Bidder:</span>
                           <span className="font-bold">

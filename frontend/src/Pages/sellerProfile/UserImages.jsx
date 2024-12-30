@@ -5,7 +5,7 @@ import { setLoader } from "../../redux/loaderSlice";
 import { EditProduct, UploadProductImage } from "../../apiCalls/products";
 import { MdDeleteForever } from "react-icons/md";
 
-export default function ProductImages({
+export default function UserImages({
   selectedProduct,
   setShowProductForm,
   getData,

@@ -3,7 +3,6 @@ import "./index.css";
 import App from "./App.jsx";
 import { ConfigProvider } from "antd";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import ShopContextdProvider from "./context/shopContext.jsx";
 import store from "./redux/store.js";
 

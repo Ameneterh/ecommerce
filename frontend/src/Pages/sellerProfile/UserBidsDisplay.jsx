@@ -2,24 +2,21 @@ import { message, Modal, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../../redux/loaderSlice";
 import { GetAllBids } from "../../apiCalls/products";
 import { MdCall } from "react-icons/md";
 import { FaSquareWhatsapp } from "react-icons/fa6";
 
 // bids from tutorial
-export default function BidsComponent({
-  showBidsModal,
-  setShowBidsModal,
-  selectedProduct,
-}) {
+export default function UserBidsDisplay() {
   const [bidsData, setBidsData] = useState([]);
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.users);
 
   const getData = async () => {
     try {
-      const response = await GetAllBids({ product: selectedProduct._id });
+      const response = await GetAllBids({ buyer: user._id });
       dispatch(setLoader(false));
       if (response.success) {
         setBidsData(response.data);
@@ -32,9 +29,16 @@ export default function BidsComponent({
 
   useEffect(() => {
     getData();
-  }, [selectedProduct]);
+  }, []);
 
   const columns = [
+    {
+      title: "Product",
+      dataIndex: "product",
+      render: (text, record) => {
+        return record.product.product_name;
+      },
+    },
     {
       title: "Bid Placed On",
       dataIndex: "createdAt",
@@ -43,10 +47,17 @@ export default function BidsComponent({
       },
     },
     {
-      title: "Name",
-      dataIndex: "fullname",
+      title: "Seller",
+      dataIndex: "seller",
       render: (text, record) => {
-        return record.buyer.fullname;
+        return record.seller.fullname;
+      },
+    },
+    {
+      title: "Asking Price",
+      dataIndex: "asking_price",
+      render: (text, record) => {
+        return record.product.asking_price.toLocaleString();
       },
     },
     {
@@ -66,7 +77,7 @@ export default function BidsComponent({
       },
     },
     {
-      title: "Contact Information",
+      title: "Seller Contacts",
       dataIndex: "contactDetails",
       render: (text, record) => {
         return (
@@ -75,14 +86,14 @@ export default function BidsComponent({
               <span className="font-bold">Phone:</span>{" "}
               <div className="flex gap-2">
                 <Link
-                  to={`tel:+${record.buyer.phone}`}
+                  to={`tel:+${record.seller.phone}`}
                   className="flex items-center p-1 text-blue-500 hover:bg-blue-100 gap-1 rounded"
                 >
                   <MdCall className="w-4 h-4" />
                   Call
                 </Link>
                 <Link
-                  to={`https://wa.me/${record.buyer.phone}`}
+                  to={`https://wa.me/${record.seller.phone}`}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="flex items-center p-1 text-green-500 hover:bg-green-100 gap-1 rounded"
@@ -95,8 +106,8 @@ export default function BidsComponent({
             </p>
             <p>
               <span className="font-bold">Email:</span>{" "}
-              <Link to={`mailto:${record.buyer.email}`}>
-                {record.buyer.email}
+              <Link to={`mailto:${record.seller.email}`}>
+                {record.seller.email}
               </Link>
             </p>
           </div>
@@ -105,29 +116,8 @@ export default function BidsComponent({
     },
   ];
   return (
-    <Modal
-      title=""
-      open={showBidsModal}
-      onCancel={() => setShowBidsModal(false)}
-      centered
-      width={"100%"}
-      footer={null}
-    >
-      <div className="flex gap-3 flex-col">
-        <p className="text-gray-500 text-lg">
-          Showing <b>BIDS</b> for
-        </p>
-        <hr className="h-[1.5px] bg-gray-400 my-2" />
-        <span className="flex items-center gap-2 mb-2">
-          <p>Product Name:</p>
-          <h1 className="text-xl text-green-950">
-            {selectedProduct.product_name}
-          </h1>
-        </span>
-
-        {/* display bids */}
-        <Table columns={columns} dataSource={bidsData} />
-      </div>
-    </Modal>
+    <div className="flex gap-3 flex-col">
+      <Table columns={columns} dataSource={bidsData} />
+    </div>
   );
 }

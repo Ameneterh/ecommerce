@@ -12,7 +12,7 @@ export default function HomePage() {
       <div className="">
         <HeroComponent />
         <LatestCollection />
-        <BestSeller />
+        {/* <BestSeller /> */}
         <OurPolicy />
         <NewsletterBox />
       </div>

@@ -3,6 +3,8 @@ import Product from "../models/product.model.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import cloudinary from "../config/cloudinaryConfig.js";
 import multer from "multer";
+import User from "../models/user.model.js";
+import Notification from "../models/notifications.model.js";
 
 const router = express.Router();
 
@@ -11,6 +13,20 @@ router.post("/add-product", authMiddleware, async (req, res) => {
   try {
     const newProduct = new Product(req.body);
     await newProduct.save();
+
+    // send notification to admin
+    const admins = await User.find({ role: "admin" });
+    admins.forEach(async (admin) => {
+      const newNotification = new Notification({
+        user: admin._id,
+        message: `A New Product Has Been Added`,
+        title: "New Product",
+        onClick: "/admin-dashboard",
+        read: false,
+      });
+      await newNotification.save();
+    });
+
     res.send({
       success: true,
       message: "New Product Added Successfully!",
@@ -56,22 +72,6 @@ router.post("/get-products", async (req, res) => {
     res.send({
       success: true,
       data: products,
-    });
-  } catch (error) {
-    res.send({
-      success: false,
-      message: error.message,
-    });
-  }
-});
-
-// edit a product
-router.put("/edit-product/:id", authMiddleware, async (req, res) => {
-  try {
-    await Product.findByIdAndUpdate(req.params.id, req.body);
-    res.send({
-      success: true,
-      message: "Product updated successfully",
     });
   } catch (error) {
     res.send({
@@ -139,7 +139,7 @@ router.put("/edit-product/:id", authMiddleware, async (req, res) => {
     await Product.findByIdAndUpdate(req.params.id, req.body);
     res.send({
       success: true,
-      message: "Product updated successfully!",
+      message: "Product updated successfully",
     });
   } catch (error) {
     res.send({
@@ -181,10 +181,23 @@ router.delete("/delete-product/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// update product status
 router.put("/update-product-status/:id", authMiddleware, async (req, res) => {
   try {
     const { status } = req.body;
-    await Product.findByIdAndUpdate(req.params.id, { status });
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
+      status,
+    });
+
+    // send notification to seller when product status changes
+    const newNotification = new Notification({
+      user: updatedProduct.seller,
+      message: `Your Product "${updatedProduct.product_name}" has been ${status}`,
+      title: "Product Status Updated",
+      onClick: "/seller-profile",
+      read: false,
+    });
+    await newNotification.save();
     res.send({
       success: true,
       message: "Product status updated successfully",

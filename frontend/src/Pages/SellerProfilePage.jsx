@@ -2,6 +2,8 @@ import React from "react";
 import MainLayout from "../layout/MainLayout";
 import { Tabs } from "antd";
 import SellerProducts from "./sellerProfile/SellerProducts";
+import UserBidsDisplay from "./sellerProfile/UserBidsDisplay";
+import UserProfilePage from "./sellerProfile/UserProfilePage";
 
 export default function SellerProfilePage() {
   return (
@@ -11,11 +13,11 @@ export default function SellerProfilePage() {
           <Tabs.TabPane tab="All Products" key="1">
             <SellerProducts />
           </Tabs.TabPane>
-          <Tabs.TabPane tab="All Bids" key="2">
-            <p>Bids</p>
+          <Tabs.TabPane tab="My Bids" key="2">
+            <UserBidsDisplay />
           </Tabs.TabPane>
           <Tabs.TabPane tab="General" key="3">
-            <p>General</p>
+            <UserProfilePage />
           </Tabs.TabPane>
         </Tabs>
       </div>

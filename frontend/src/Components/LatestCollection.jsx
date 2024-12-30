@@ -2,13 +2,38 @@ import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/shopContext";
 import TitleText from "./TitleText";
 import ProductItem from "./ProductItem";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoader } from "../redux/loaderSlice";
+import { GetProducts } from "../apiCalls/products";
+import { message } from "antd";
 
 export default function LatestCollection() {
-  const { products } = useContext(ShopContext);
+  // const { products } = useContext(ShopContext);
+  const [products, setProducts] = useState([]);
   const [latestProducts, setLatestProducts] = useState([]);
 
+  const { user } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
+  console.log(products);
+
+  const getData = async () => {
+    try {
+      dispatch(setLoader(true));
+      const response = await GetProducts(null);
+      dispatch(setLoader(false));
+
+      if (response.success) {
+        setProducts(response.data);
+      }
+    } catch (error) {
+      dispatch(setLoader(false));
+      message.error(error.message);
+    }
+  };
+
   useEffect(() => {
-    setLatestProducts(products.slice(0, 5));
+    getData();
   }, []);
 
   return (
@@ -25,13 +50,14 @@ export default function LatestCollection() {
 
       {/* rendering products */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-        {latestProducts.map((item, index) => (
+        {products.slice(0, 5).map((product, index) => (
           <ProductItem
             key={index}
-            id={item._id}
-            image={item.image}
-            name={item.name}
-            price={item.price}
+            id={product._id}
+            image={product.images[0]}
+            name={product.product_name}
+            category={product.category}
+            price={product.asking_price}
           />
         ))}
       </div>

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaSearch, FaShoppingCart } from "react-icons/fa";
-import { MdArrowForwardIos } from "react-icons/md";
+import { MdArrowForwardIos, MdNotificationsActive } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
 import { assets } from "../assets/assets";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -9,14 +8,20 @@ import { GetCurrentUser } from "../apiCalls/users";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/userSlice.js";
 import { setLoader } from "../redux/loaderSlice";
-import { Button } from "antd";
+import { Avatar, Badge, Button, message } from "antd";
+import NotificationsComponent from "./NotificationsComponent.jsx";
+import {
+  GetAllNotifications,
+  ReadAllNotifications,
+} from "../apiCalls/notifications.js";
 
 export default function HeaderComponent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => state.users);
-  const { setShowSearch, getCartCount } = useContext(ShopContext);
+  const [notifications, setNotifications] = useState([]);
+  const [showNofications, setShowNotifications] = useState(false);
 
   const validateToken = async () => {
     try {
@@ -35,9 +40,36 @@ export default function HeaderComponent() {
     }
   };
 
+  const getNotifications = async () => {
+    try {
+      const response = await GetAllNotifications();
+      if (response.success) {
+        setNotifications(response.data);
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      message.error(error.message);
+    }
+  };
+
+  const readNotifications = async () => {
+    try {
+      const response = await ReadAllNotifications();
+      if (response.success) {
+        getNotifications();
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      message.error(error.message);
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       validateToken();
+      getNotifications();
     }
   }, []);
 
@@ -74,45 +106,62 @@ export default function HeaderComponent() {
 
       {/* user login, search, and cart */}
       <div className="flex items-center gap-3 sm:gap-6">
-        {/* <FaSearch
-          onClick={() => setShowSearch(true)}
-          className="text-xl cursor-pointer"
-        /> */}
-
         {user ? (
-          <div className="group relative">
-            <div className="relative">
-              <img src={user.avatar} className="w-10 cursor-pointer" />
-              <p className="absolute right-0 bottom-1 w-4 text-center leading-4 bg-red-600 text-white rounded-full">
-                10
-              </p>
-            </div>
-            <div className="group-hover:block hidden absolute dropdown-menu right-0 bg-gray-50 overflow-hidden">
-              <div className="p-2 font-normal">
-                <p>{user.fullname}</p>
-                <p className="text-blue-600">@{user.email}</p>
+          <div className="flex items-center gap-1">
+            <div className="group relative">
+              <div className="">
+                <img src={user.avatar} className="w-12 cursor-pointer" />
               </div>
-              <div className="flex flex-col gap-2 w-full p-1 bg-gray-700 text-white rounded">
-                <p
-                  onClick={() => {
-                    if (user.role === "user") {
-                      navigate("/seller-profile");
-                    } else {
-                      navigate("/admin-dashboard");
-                    }
-                  }}
-                  className="cursor-pointer hover:text-black p-1 hover:bg-slate-200"
-                >
-                  Profile
-                </p>
-                <p
-                  onClick={() => handleLogout()}
-                  className="cursor-pointer hover:text-black p-1 hover:bg-slate-200"
-                >
-                  Logout
-                </p>
+              <div className="group-hover:block hidden absolute dropdown-menu right-0 bg-gray-50 overflow-hidden">
+                <div className="p-2 font-normal">
+                  <p>{user.fullname}</p>
+                  <p className="text-blue-600">@{user.email}</p>
+                </div>
+                <div className="flex flex-col gap-2 w-full p-1 bg-gray-700 text-white rounded">
+                  <p
+                    onClick={() => {
+                      if (user.role === "user") {
+                        navigate("/seller-profile");
+                      } else {
+                        navigate("/admin-dashboard");
+                      }
+                    }}
+                    className="cursor-pointer hover:text-black p-1 hover:bg-slate-200"
+                  >
+                    Profile
+                  </p>
+                  <p
+                    onClick={() => handleLogout()}
+                    className="cursor-pointer hover:text-black p-1 hover:bg-slate-200"
+                  >
+                    Logout
+                  </p>
+                </div>
               </div>
+
+              {/* display notifications modal */}
+              <NotificationsComponent
+                notifications={notifications}
+                reloadNotifications={getNotifications}
+                showNofications={showNofications}
+                setShowNotifications={setShowNotifications}
+              />
             </div>
+
+            {/* notifications icon */}
+            <Badge
+              count={
+                notifications.filter((notification) => !notification.read)
+                  .length
+              }
+              onClick={() => {
+                readNotifications();
+                setShowNotifications(true);
+              }}
+              className="cursor-pointer"
+            >
+              <Avatar icon={<MdNotificationsActive />} />
+            </Badge>
           </div>
         ) : (
           <div
