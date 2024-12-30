@@ -52,7 +52,7 @@ export default function CollectionsPage() {
 
   return (
     <MainLayout>
-      <div className="flex gap-5">
+      <div className="flex gap-5 mt-8 sm:mt-0">
         {showFilters && (
           <ProductFiltersComponent
             showFilters={showFilters}

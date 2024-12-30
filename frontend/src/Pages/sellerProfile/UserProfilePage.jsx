@@ -22,7 +22,7 @@ export default function UserProfilePage() {
       </div>
 
       {/* display user details */}
-      <div className="flex items-start justify-between mt-8 border-t border-t-gray-400">
+      <div className="flex flex-col sm:flex-row items-start justify-between mt-8 border-t border-t-gray-400">
         <img
           src={user.avatar}
           alt={user.fullname}

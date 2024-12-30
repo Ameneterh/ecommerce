@@ -8,7 +8,7 @@ export default function HeroComponent() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col sm:flex-row">
+    <div className="flex flex-col pt-10 sm:pt-0 sm:flex-row">
       {/* hero left side */}
       <div className="w-full sm:w-2/3 flex items-center justify-center pb-10 sm:py-0">
         <div className="text-[#414141]">
@@ -25,7 +25,7 @@ export default function HeroComponent() {
 
           <p className="my-2 text-xl text-center capitalize">
             We picked every item with care just for you,{" "}
-            <span className="block">
+            <span className="sm:block">
               <b>you must try</b> at least once
             </span>
           </p>

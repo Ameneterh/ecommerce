@@ -7,7 +7,7 @@ import { assets } from "../assets/assets";
 export default function AboutPage() {
   return (
     <MainLayout>
-      <section className="flex flex-col max-w-7xl mx-auto min-h-[60svh]">
+      <section className="flex flex-col max-w-7xl mx-auto min-h-[60svh] mt-8 sm:mt-0">
         <div className="text-2xl text-center">
           <TitleText text1={"about"} text2={"us"} />
         </div>
@@ -57,7 +57,7 @@ export default function AboutPage() {
         </div>
 
         <div className="flex flex-col md:flex-row text-sm mb-20">
-          <div className="border border-gray-700 px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
+          <div className="border border-gray-700 border-solid px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
             <b>Convenience:</b>
             <p className="text-gray-600">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
@@ -66,7 +66,7 @@ export default function AboutPage() {
               accusamus iusto est doloribus numquam.
             </p>
           </div>
-          <div className="border px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
+          <div className="border border-gray-700 border-solid px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
             <b>With you 24/7:</b>
             <p className="text-gray-600">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
@@ -75,7 +75,7 @@ export default function AboutPage() {
               accusamus iusto est doloribus numquam.
             </p>
           </div>
-          <div className="border px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
+          <div className="border border-gray-700 border-solid px-10 md:px-16 py-8 sm:py20 flex flex-col gap-5">
             <b>Exceptional Satisfaction:</b>
             <p className="text-gray-600">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae

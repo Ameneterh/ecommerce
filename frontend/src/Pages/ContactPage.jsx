@@ -14,7 +14,7 @@ import { assets } from "../assets/assets";
 export default function ContactPage() {
   return (
     <MainLayout>
-      <section className="max-w-7xl mx-auto min-h-[60svh]">
+      <section className="max-w-7xl mx-auto min-h-[60svh] mt-8 sm:mt-0">
         <div className="text-center text-2xl">
           <TitleText text1={"contact"} text2={"us"} />
         </div>
