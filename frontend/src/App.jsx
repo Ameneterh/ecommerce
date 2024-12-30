@@ -1,12 +1,8 @@
-import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import Cart from "./pages/Cart";
+// import AboutPage from "./pages/AboutPage";
 import CollectionsPage from "./pages/CollectionsPage";
 import ContactPage from "./Pages/ContactPage";
-import OrdersPage from "./pages/OrdersPage";
-import PlaceOrder from "./pages/PlaceOrder";
 import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
@@ -26,14 +22,11 @@ function App() {
         <Routes>
           {/* unprotected routes */}
           <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
+          {/* <Route path="/about" element={<AboutPage />} /> */}
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/collections" element={<CollectionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/product/:productId" element={<ProductPage />} />
 
           {/* protected routes */}
