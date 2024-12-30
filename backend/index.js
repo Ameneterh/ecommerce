@@ -6,6 +6,7 @@ import express from "express";
 import "dotenv/config";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import path from "path";
 import cors from "cors";
 
 const app = express();
@@ -24,5 +25,16 @@ app.use("/backend/users", userRouter);
 app.use("/backend/products", productRouter);
 app.use("/backend/bids", bidsRouter);
 app.use("/backend/notifications", notificationsRouter);
+
+// deployment config
+const __dirname = path.resolve();
+
+// render deployment
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+  });
+}
 
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
