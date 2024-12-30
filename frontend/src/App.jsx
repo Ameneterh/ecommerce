@@ -8,7 +8,6 @@ import ContactPage from "./Pages/ContactPage";
 import OrdersPage from "./pages/OrdersPage";
 import PlaceOrder from "./pages/PlaceOrder";
 import ProductPage from "./pages/ProductPage";
-import { ToastContainer, toast } from "react-toastify";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import ProtectedPage from "./components/ProtectedPage";
