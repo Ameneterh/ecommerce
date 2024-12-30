@@ -3,7 +3,7 @@ import HomePage from "./Pages/HomePage.jsx";
 import AboutPage from "./Pages/AboutPage.jsx";
 import CollectionsPage from "./Pages/CollectionsPage.jsx";
 import ContactPage from "./Pages/ContactPage.jsx";
-import ProductPage from "./pages/ProductPage.jsx";
+import ProductPage from "./Pages/ProductPage.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import RegistrationPage from "./Pages/RegistrationPage.jsx";
 import ProtectedPage from "./Components/ProtectedPage.jsx";
