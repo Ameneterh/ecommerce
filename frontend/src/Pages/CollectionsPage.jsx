@@ -4,13 +4,13 @@ import { MdFilterList } from "react-icons/md";
 import { IoSearchOutline } from "react-icons/io5";
 import MainLayout from "../layout/MainLayout";
 import { ShopContext } from "../context/shopContext";
-import TitleText from "../components/TitleText";
-import ProductItem from "../components/ProductItem";
+import TitleText from "../Components/TitleText";
+import ProductItem from "../Components/ProductItem";
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from "antd";
 import { setLoader } from "../redux/loaderSlice";
 import { GetProducts } from "../apiCalls/products";
-import ProductFiltersComponent from "../components/ProductFiltersComponent";
+import ProductFiltersComponent from "../Components/ProductFiltersComponent";
 
 export default function CollectionsPage() {
   const [products, setProducts] = useState([]);

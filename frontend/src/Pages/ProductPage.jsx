@@ -11,7 +11,7 @@ import { AiOutlineProduct } from "react-icons/ai";
 import MainLayout from "../layout/MainLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ShopContext } from "../context/shopContext";
-import RelatedProducts from "../components/RelatedProducts";
+import RelatedProducts from "../Components/RelatedProducts";
 import { GetAllBids, GetProductById, GetProducts } from "../apiCalls/products";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../redux/loaderSlice";

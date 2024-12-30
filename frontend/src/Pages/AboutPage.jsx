@@ -1,7 +1,7 @@
 import React from "react";
 import MainLayout from "../layout/MainLayout";
-import TitleText from "../components/TitleText";
-import Divider from "../components/Divider";
+import TitleText from "../Components/TitleText";
+import Divider from "../Components/Divider";
 import { assets } from "../assets/assets";
 
 export default function AboutPage() {

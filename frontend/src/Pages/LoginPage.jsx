@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import TitleText from "../components/TitleText";
+import TitleText from "../Components/TitleText";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Form, Input, message } from "antd";
-import Divider from "../components/Divider";
+import Divider from "../Components/Divider";
 import { LoginUser } from "../apiCalls/users";
 import { useDispatch } from "react-redux";
 import { setLoader } from "../redux/loaderSlice";

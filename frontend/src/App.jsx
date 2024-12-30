@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage.jsx";
-import AboutPage from "./pages/AboutPage.jsx";
-import CollectionsPage from "./pages/CollectionsPage.jsx";
+import AboutPage from "./Pages/AboutPage.jsx";
+import CollectionsPage from "./Pages/CollectionsPage.jsx";
 import ContactPage from "./Pages/ContactPage.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import RegistrationPage from "./pages/RegistrationPage.jsx";
-import ProtectedPage from "./components/ProtectedPage.jsx";
-import Spinner from "./components/Spinner.jsx";
-import SellerProfilePage from "./pages/SellerProfilePage.jsx";
-import AdminDashboard from "./pages/adminDashboard/AdminDashboard.jsx";
+import LoginPage from "./Pages/LoginPage.jsx";
+import RegistrationPage from "./Pages/RegistrationPage.jsx";
+import ProtectedPage from "./Components/ProtectedPage.jsx";
+import Spinner from "./Components/Spinner.jsx";
+import SellerProfilePage from "./Pages/SellerProfilePage.jsx";
+import AdminDashboard from "./Pages/adminDashboard/AdminDashboard.jsx";
 import { useSelector } from "react-redux";
 
 function App() {

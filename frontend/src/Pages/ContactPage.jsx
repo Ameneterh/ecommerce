@@ -1,4 +1,4 @@
-import TitleText from "../components/TitleText";
+import TitleText from "../Components/TitleText";
 import React from "react";
 import MainLayout from "../layout/MainLayout";
 import { MdEmail, MdPhoneInTalk } from "react-icons/md";

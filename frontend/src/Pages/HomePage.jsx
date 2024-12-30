@@ -1,10 +1,10 @@
 import React from "react";
 import MainLayout from "../layout/MainLayout";
 import HeroComponent from "../Components/HeroComponent";
-import LatestCollection from "../components/LatestCollection";
-import BestSeller from "../components/BestSeller";
-import OurPolicy from "../components/OurPolicy";
-import NewsletterBox from "../components/NewsLetterBox";
+import LatestCollection from "../Components/LatestCollection";
+import BestSeller from "../Components/BestSeller";
+import OurPolicy from "../Components/OurPolicy";
+import NewsletterBox from "../Components/NewsLetterBox";
 
 export default function HomePage() {
   return (

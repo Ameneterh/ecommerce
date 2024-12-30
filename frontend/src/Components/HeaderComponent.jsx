@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MdArrowForwardIos, MdNotificationsActive } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
-import { assets } from "../assets/assets";
+import { assets } from "../assets/assets.js";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { ShopContext } from "../context/shopContext";
-import { GetCurrentUser } from "../apiCalls/users";
+import { ShopContext } from "../context/shopContext.jsx";
+import { GetCurrentUser } from "../apiCalls/users.js";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/userSlice.js";
-import { setLoader } from "../redux/loaderSlice";
+import { setLoader } from "../redux/loaderSlice.js";
 import { Avatar, Badge, Button, message } from "antd";
 import NotificationsComponent from "./NotificationsComponent.jsx";
 import {
