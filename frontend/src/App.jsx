@@ -13,6 +13,7 @@ import AdminDashboard from "./Pages/adminDashboard/AdminDashboard.jsx";
 import { useSelector } from "react-redux";
 import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
 import TermsOfUse from "./Pages/TermsOfUse.jsx";
+import ScrollToTop from "./Components/ScrollToTop.jsx";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
@@ -21,6 +22,7 @@ function App() {
     <div className="">
       {loading && <Spinner />}
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           {/* unprotected routes */}
           <Route path="/" element={<HomePage />} />
