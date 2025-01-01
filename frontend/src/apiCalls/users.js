@@ -55,3 +55,29 @@ export const UpdateUserStatus = async (status, id) => {
     return error.message;
   }
 };
+
+// update a user
+export const EditUser = async (id, payload) => {
+  try {
+    const response = await axiosInstance.put(
+      `/backend/users/edit-user/${id}`,
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+// upload user image
+export const UploadUserImage = async (payload) => {
+  try {
+    const response = await axiosInstance.post(
+      "/backend/users//upload-user-image",
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};

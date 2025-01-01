@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
+import cloudinary from "../config/cloudinaryConfig.js";
+import multer from "multer";
 
 const router = express.Router();
 
@@ -120,5 +122,57 @@ router.put("/update-user-status/:id", authMiddleware, async (req, res) => {
     });
   }
 });
+
+// edit a user
+router.put("/edit-user/:id", authMiddleware, async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.params.id, req.body);
+    res.send({
+      success: true,
+      message: "User updated successfully",
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+// handle get image from PC
+const storage = multer.diskStorage({
+  filename: function (req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  },
+});
+
+router.post(
+  "/upload-user-image",
+  authMiddleware,
+  multer({ storage: storage }).single("file"),
+  async (req, res) => {
+    try {
+      // upload image to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "dresscode-userImages",
+      });
+
+      const userId = req.body.userId;
+      await User.findByIdAndUpdate(userId, {
+        $push: { images: result.secure_url },
+      });
+      res.send({
+        success: true,
+        message: "Image uploaded successfully",
+        data: result.secure_url,
+      });
+    } catch (error) {
+      res.send({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
+);
 
 export default router;

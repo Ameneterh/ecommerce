@@ -18,6 +18,7 @@ export default function RegistrationPage() {
   const rules = [{ required: true, message: "All fields required!" }];
 
   const handleFormSubmit = async (values) => {
+    console.log(values);
     try {
       dispatch(setLoader(true));
       const response = await RegisterUser(values);
@@ -47,9 +48,9 @@ export default function RegistrationPage() {
 
   return (
     <div className="min-h-screen bg-gray-300 flex flex-col justify-center p-2">
-      <div className="w-full max-w-xl mx-auto bg-white p-4 sm:p-10 shadow rounded sm:rounded-lg">
+      <div className="w-full max-w-xl mx-auto bg-white p-4 sm:p-8 shadow rounded sm:rounded-lg">
         <div className="text-xl sm:text-2xl font-bold flex items-center gap-2">
-          <TitleText text1={"dc"} text2={"register"} />
+          <TitleText text1={"registration"} />
         </div>
         <Divider />
         <Form layout="vertical" className="mt-6" onFinish={handleFormSubmit}>
@@ -88,7 +89,7 @@ export default function RegistrationPage() {
             </div>
           </Form.Item>
 
-          <div className="my-6">
+          {/* <div className="my-6">
             <label
               htmlFor="avatar"
               className="block text-sm font-medium text-gray-700"
@@ -121,6 +122,36 @@ export default function RegistrationPage() {
                 />
               </label>
             </div>
+          </div> */}
+
+          <div className="flex items-center gap-1 mb-5 justify-center text-center bg-gray-100 rounded py-1">
+            {/* <Form.Item
+              label=""
+              name="accept_tc_privacy"
+              valuePropName="checked"
+              className="flex items-center"
+            >
+              <Input
+                type="checkbox"
+                className="max-width"
+                onChange={(e) => {
+                  {
+                    e.target.checked;
+                  }
+                }}
+                checked={accept_tc_privacy}
+              />
+            </Form.Item> */}
+            <p>
+              By clicking on register, you agree with our{" "}
+              <Link to="/terms-of-use" target="_blank">
+                Terms of Use
+              </Link>{" "}
+              and{" "}
+              <Link to="/privacy-policy" target="_blank">
+                Privacy Policy
+              </Link>
+            </p>
           </div>
 
           <Button type="primary" htmlType="submit" block>

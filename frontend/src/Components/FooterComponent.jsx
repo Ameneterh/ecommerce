@@ -26,6 +26,7 @@ export default function FooterComponent() {
             <Link to="/">Home</Link>
             <Link to="/about">About Us</Link>
             <Link to="/privacy-policy">Privacy Policy</Link>
+            <Link to="/terms-of-use">Terms of Use</Link>
           </ul>
         </div>
 

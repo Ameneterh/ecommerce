@@ -2,16 +2,16 @@ import { Button, message, Upload } from "antd";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLoader } from "../../redux/loaderSlice";
-import { EditProduct, UploadProductImage } from "../../apiCalls/products";
 import { MdDeleteForever } from "react-icons/md";
+import { EditUser, UploadUserImage } from "../../apiCalls/users";
 
 export default function UserImages({
-  selectedProduct,
-  setShowProductForm,
-  getData,
+  selectedUser,
+  setShowEditUser,
+  // getData,
 }) {
   const [file, setFile] = useState(null);
-  const [images, setImages] = useState(selectedProduct.images);
+  const [images, setImages] = useState(selectedUser.images);
   const [showPreview, setShowPreview] = useState(true);
   const dispatch = useDispatch();
 
@@ -20,15 +20,15 @@ export default function UserImages({
       dispatch(setLoader(true));
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("productId", selectedProduct._id);
-      const response = await UploadProductImage(formData);
+      formData.append("userId", selectedUser._id);
+      const response = await UploadUserImage(formData);
       dispatch(setLoader(false));
       if (response.success) {
         message.success(response.message);
         setImages([...images, response.data]);
         setShowPreview(false);
         setFile(null);
-        getData();
+        // getData();
       } else {
         message.error(response.message);
       }
@@ -42,15 +42,15 @@ export default function UserImages({
     try {
       dispatch(setLoader(true));
       const updatedImagesArray = images.filter((img) => img !== image);
-      const updatedProduct = { ...selectedProduct, images: updatedImagesArray };
+      const updatedUser = { ...selectedUser, images: updatedImagesArray };
 
-      const response = await EditProduct(selectedProduct._id, updatedProduct);
+      const response = await EditUser(selectedUser._id, updatedUser);
 
       if (response.success) {
         message.success(response.message);
         setImages(updatedImagesArray);
         setFile(null);
-        getData();
+        // getData();
       } else {
         throw new Error(response.message);
       }
@@ -62,9 +62,9 @@ export default function UserImages({
 
   return (
     <div>
-      {/* display product images */}
+      {/* display user images */}
       <div className="flex gap-5 flex-wrap">
-        {images.map((image) => {
+        {images?.map((image) => {
           return (
             <div className="flex gap-2 border border-solid border-gray-300 rounded p-3 mb-4 items-end">
               <img src={image} alt="" className="h-20 w-20 object-cover" />
@@ -93,7 +93,7 @@ export default function UserImages({
       </Upload>
 
       <div className="flex justify-end gap-4 mt-4">
-        <Button type="default" onClick={() => setShowProductForm(false)}>
+        <Button type="default" onClick={() => setShowEditUser(false)}>
           Cancel
         </Button>
 

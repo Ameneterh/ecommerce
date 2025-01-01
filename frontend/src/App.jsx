@@ -12,6 +12,7 @@ import SellerProfilePage from "./Pages/SellerProfilePage.jsx";
 import AdminDashboard from "./Pages/adminDashboard/AdminDashboard.jsx";
 import { useSelector } from "react-redux";
 import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
+import TermsOfUse from "./Pages/TermsOfUse.jsx";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/collections" element={<CollectionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/product/:productId" element={<ProductPage />} />

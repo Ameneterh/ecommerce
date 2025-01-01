@@ -15,11 +15,11 @@ export default function HeroComponent() {
           <div className="flex items-center gap-2">
             <p className="w-8 md:w-full h-[2px] bg-[#414141] flex-1"></p>
             <p className="text-sm md:text-base uppercase font-semibold">
-              {date.toLocaleString("default", { month: "long" })} bestseller
+              {date.toLocaleString("default", { month: "long" })} deals
             </p>
           </div>
 
-          <h1 className="prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed">
+          <h1 className="prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed text-center">
             Latest Arrivals
           </h1>
 

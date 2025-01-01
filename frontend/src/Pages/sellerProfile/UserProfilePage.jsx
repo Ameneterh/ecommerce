@@ -1,12 +1,34 @@
-import { Button } from "antd";
+import { Button, message } from "antd";
 import moment from "moment";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import EditUser from "../EditUser";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import EditUserForm from "../EditUserForm";
+import { setLoader } from "../../redux/loaderSlice";
+import { GetCurrentUser } from "../../apiCalls/users";
 
 export default function UserProfilePage() {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.users);
   const [showEditUser, setShowEditUser] = useState(false);
+  // const [user, setUser] = useState(currentUser);
+
+  // const getData = async () => {
+  //   try {
+  //     dispatch(setLoader(true));
+  //     const response = await GetCurrentUser();
+  //     dispatch(setLoader(false));
+  //     if (response.success) {
+  //       setUser(response.data);
+  //     }
+  //   } catch (error) {
+  //     dispatch(setLoader(false));
+  //     message.error(error.message);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <div className="w-full max-w-xl mx-auto px-2">
@@ -75,7 +97,7 @@ export default function UserProfilePage() {
       </div>
 
       {showEditUser && (
-        <EditUser
+        <EditUserForm
           showEditUser={showEditUser}
           setShowEditUser={setShowEditUser}
           selectedUser={user}

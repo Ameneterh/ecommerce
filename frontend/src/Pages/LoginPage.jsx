@@ -49,7 +49,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gray-300 flex flex-col justify-center px-2">
       <div className="w-full max-w-xl mx-auto bg-white p-4 sm:p-10 shadow rounded sm:rounded-lg">
         <div className="text-xl sm:text-2xl font-bold flex items-center gap-2">
-          <TitleText text1={"dc"} text2={"login"} />
+          <TitleText text1={"login"} />
         </div>
         <Divider />
         <Form layout="vertical" className="mt-6" onFinish={handleFormSubmit}>
