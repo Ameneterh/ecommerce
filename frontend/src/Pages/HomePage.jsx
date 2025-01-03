@@ -13,7 +13,7 @@ export default function HomePage() {
         <HeroComponent />
         <LatestCollection />
         {/* <BestSeller /> */}
-        <OurPolicy />
+        {/* <OurPolicy /> */}
         {/* <NewsletterBox /> */}
       </div>
     </MainLayout>

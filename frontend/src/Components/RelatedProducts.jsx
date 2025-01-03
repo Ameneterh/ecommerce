@@ -2,19 +2,40 @@ import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/shopContext";
 import TitleText from "./TitleText";
 import ProductItem from "./ProductItem";
+import { message } from "antd";
+import { GetProducts } from "../apiCalls/products";
 
-export default function RelatedProducts({ category, subCategory }) {
-  const { products } = useContext(ShopContext);
-  const [related, setRelated] = useState([]);
+export default function RelatedProducts({ category, seller, currentProduct }) {
+  const [products, setProducts] = useState(null);
+  const [related, setRelated] = useState(null);
+
+  console.log(products);
+
+  const getData = async () => {
+    const filters = {
+      category: category,
+      seller: seller,
+    };
+
+    try {
+      const response = await GetProducts(filters);
+      if (response.success) {
+        setProducts(response.data);
+      }
+    } catch (error) {
+      message.error(error.message);
+    }
+  };
 
   useEffect(() => {
-    if (products.length > 0) {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    if (products?.length > 0) {
       let productsCopy = products.slice();
 
-      productsCopy = productsCopy.filter((item) => category === item.category);
-      productsCopy = productsCopy.filter(
-        (item) => subCategory === item.subCategory
-      );
+      productsCopy = productsCopy.filter((item) => item._id !== currentProduct);
 
       setRelated(productsCopy.slice(0, 5));
     }
@@ -27,13 +48,15 @@ export default function RelatedProducts({ category, subCategory }) {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-        {related.map((item, index) => (
+        {related?.map((product, index) => (
           <ProductItem
             key={index}
-            id={item._id}
-            image={item.image}
-            name={item.name}
-            price={item.price}
+            id={product._id}
+            name={product.product_name}
+            category={product.category}
+            delivery={product.deliveryincluded}
+            asking_price={product.asking_price}
+            image={product.images[0]}
           />
         ))}
       </div>

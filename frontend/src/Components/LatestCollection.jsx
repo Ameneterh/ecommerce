@@ -15,8 +15,6 @@ export default function LatestCollection() {
   const { user } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
-  console.log(products);
-
   const getData = async () => {
     try {
       dispatch(setLoader(true));

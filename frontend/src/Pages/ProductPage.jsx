@@ -309,7 +309,8 @@ export default function ProductPage() {
           {/* display related products */}
           <RelatedProducts
             category={product.category}
-            subCategory={product.sub_category}
+            seller={product.seller}
+            currentProduct={product._id}
           />
         </div>
       ) : (

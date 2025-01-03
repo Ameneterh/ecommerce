@@ -46,7 +46,6 @@ export default function CollectionsPage() {
   };
 
   useEffect(() => {
-    console.log(filters);
     getData();
   }, [filters]);
 
@@ -96,7 +95,7 @@ export default function CollectionsPage() {
                 category={product.category}
                 description={product.product_description}
                 delivery={product.deliveryincluded}
-                price={product.asking_price}
+                asking_price={product.asking_price}
                 image={product.images[0]}
               />
             ))}

@@ -24,13 +24,31 @@ export default function ProductReviewRating({ getData, product }) {
       comment: comment,
     };
     try {
-      //   dispatch(setLoader(true));
+      const isReviewed = product.reviews.find(
+        (review) => review.buyer._id.toString() === user._id.toString()
+      );
+
+      if (isReviewed) {
+        // product.reviews.forEach((review) => {
+        //   if (review.buyer._id.toString() === user._id.toString()) {
+        //     response = AddReview({
+        //       ...formData,
+        //       product: product._id,
+        //       seller: product.seller._id,
+        //       buyer: user._id,
+        //     });
+        //   }
+        // });
+        message.error("You have already reviewed this product!");
+        return;
+      }
       const response = await AddReview({
         ...formData,
         product: product._id,
         seller: product.seller._id,
         buyer: user._id,
       });
+
       //   dispatch(setLoader(false));
       if (response.success) {
         setRating(null);

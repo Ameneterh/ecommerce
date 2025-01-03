@@ -11,7 +11,7 @@ export default function ProductItem({
   sub_category,
   description,
   delivery,
-  price,
+  asking_price,
 }) {
   const { currency } = useContext(ShopContext);
 
@@ -39,7 +39,7 @@ export default function ProductItem({
         <p className="flex items-center justify-between">
           <span className="text-sm font-medium flex items-center  text-green-800">
             {currency}
-            {price.toLocaleString()}
+            {asking_price?.toLocaleString()}
           </span>
           <span
             className={`text-xs ${
