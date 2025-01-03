@@ -2,6 +2,7 @@ import userRouter from "./routes/user.route.js";
 import productRouter from "./routes/product.route.js";
 import bidsRouter from "./routes/bids.routes.js";
 import notificationsRouter from "./routes/notification.route.js";
+import reviewsRouter from "./routes/reviews.route.js";
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -28,6 +29,7 @@ app.use("/backend/users", userRouter);
 app.use("/backend/products", productRouter);
 app.use("/backend/bids", bidsRouter);
 app.use("/backend/notifications", notificationsRouter);
+app.use("/backend/reviews", reviewsRouter);
 
 // render deployment
 if (process.env.NODE_ENV === "production") {

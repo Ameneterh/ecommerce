@@ -142,8 +142,30 @@ export default function AdminProducts() {
 
   return (
     <div>
+      <div className="flex justify-end mb-4">
+        <Button
+          onClick={() => {
+            // setSelectedAdvert(null);
+            // setShowAdvertForm(true);
+          }}
+          type="default"
+        >
+          Add Product Advert
+        </Button>
+      </div>
+
       {/* table to show products */}
       <Table columns={columns} dataSource={products} scroll={{ x: 400 }} />
+
+      {/* call product form */}
+      {/* {showAdvertForm && (
+              <SellerProductForm
+                showProductForm={showProductForm}
+                setShowProductForm={setShowProductForm}
+                selectedProduct={selectedProduct}
+                getData={getData}
+              />
+            )} */}
     </div>
   );
 }

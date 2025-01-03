@@ -116,3 +116,30 @@ export const GetAllBids = async (filters) => {
     return error.message;
   }
 };
+
+// ------------------------------- product reviews -------------------------
+// add review
+export const AddReview = async (payload) => {
+  try {
+    const response = await axiosInstance.post(
+      `/backend/reviews/new-review/`,
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+// get all bids
+export const GetAllReviews = async (filters) => {
+  try {
+    const response = await axiosInstance.post(
+      "/backend/reviews/get-all-reviews",
+      filters
+    );
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};

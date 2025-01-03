@@ -64,45 +64,45 @@ export default function AboutPage() {
         </div>
 
         <div className="flex flex-col items-center justify-center md:grid grid-cols-5 text-sm mb-20">
-          <div className="p-8 flex flex-col items-center gap-3">
+          <div className="p-8 flex flex-col items-center gap-3 text-center">
             <img
               src={assets.convenience}
               alt=""
               className="w-20 rounded-full"
             />
-            <b>Convenience:</b>
+            <b>Convenience</b>
           </div>
-          <div className="p-8 flex flex-col items-center gap-3">
+          <div className="p-8 flex flex-col items-center gap-3 text-center">
             <img
               src={assets.support_247}
               alt=""
               className="w-20 rounded-full"
             />
-            <b>With you 24/7:</b>
+            <b>With you 24/7</b>
           </div>
-          <div className="p-8 flex flex-col items-center gap-3">
+          <div className="p-8 flex flex-col items-center gap-3 text-center">
             <img
               src={assets.exceptional_logo}
               alt=""
               className="w-20 rounded-full"
             />
-            <b>Exceptional Satisfaction:</b>
+            <b>Exceptional Satisfaction</b>
           </div>
-          <div className="p-8 flex flex-col items-center gap-3">
+          <div className="p-8 flex flex-col items-center gap-3 text-center">
             <img
               src={assets.wide_products}
               alt=""
               className="w-20 rounded-full"
             />
-            <b>Wide Product Selection:</b>
+            <b>Wide Product Selection</b>
           </div>
-          <div className="p-8 flex flex-col items-center gap-3">
+          <div className="p-8 flex flex-col items-center gap-3 text-center">
             <img
               src={assets.exclucive_offer}
               alt=""
               className="w-20 rounded-full"
             />
-            <b>Exclusive Deals & Discounts:</b>
+            <b>Exclusive Deals & Discounts</b>
           </div>
         </div>
       </section>

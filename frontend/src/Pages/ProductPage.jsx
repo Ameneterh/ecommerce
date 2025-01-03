@@ -12,13 +12,20 @@ import MainLayout from "../layout/MainLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ShopContext } from "../context/shopContext";
 import RelatedProducts from "../Components/RelatedProducts";
-import { GetAllBids, GetProductById, GetProducts } from "../apiCalls/products";
+import {
+  GetAllBids,
+  GetAllReviews,
+  GetProductById,
+  GetProducts,
+} from "../apiCalls/products";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../redux/loaderSlice";
 import moment from "moment";
 import { Button, message } from "antd";
 import BidsModal from "./sellerProfile/BidsModal";
-import BidsComponent from "./sellerProfile/BidsComponent";
+import ProductReviewRating from "../Components/ProductReviewRating";
+import ReviewDisplayComponent from "../Components/ReviewDisplayComponent";
+import RatingComponent from "../Components/RatingComponent";
 
 export default function ProductPage() {
   const navigate = useNavigate();
@@ -30,9 +37,9 @@ export default function ProductPage() {
   const [showAddBidsModal, setShowAddBidsModal] = useState(false);
 
   const { productId } = useParams();
-  const { currency, addToCart } = useContext(ShopContext);
-  // const [image, setImage] = useState("");
-  // const [size, setSize] = useState("");
+  const { currency } = useContext(ShopContext);
+
+  // console.log(product.reviews);
 
   const getData = async () => {
     try {
@@ -42,7 +49,12 @@ export default function ProductPage() {
 
       if (response.success) {
         const bidsResponse = await GetAllBids({ product: productId });
-        setProduct({ ...response.data, bids: bidsResponse.data });
+        const reviewsResponse = await GetAllReviews({ product: productId });
+        setProduct({
+          ...response.data,
+          bids: bidsResponse.data,
+          reviews: reviewsResponse.data,
+        });
       }
     } catch (error) {
       dispatch(setLoader(false));
@@ -58,7 +70,7 @@ export default function ProductPage() {
     <MainLayout>
       {product ? (
         <div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">
             {/* product images */}
             <div className="flex flex-col gap-2">
               <img
@@ -93,6 +105,9 @@ export default function ProductPage() {
                   {moment(product.createdAt).format("hh:mm A")}
                 </span>
               </div>
+
+              {/* product reviews and rating input */}
+              <ProductReviewRating getData={getData} product={product} />
             </div>
 
             {/* product information */}
@@ -111,12 +126,18 @@ export default function ProductPage() {
               <hr className="my-3" />
               <h1 className="text-xl text-blue-950">Product Details</h1>
               <div className="flex items-center gap-1 mt-5 text-xl text-orange-500">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar className="text-gray-500" />
-                <p className="text-sm text-gray-400 ml-2">(122)</p>
+                {product.reviews.length > 0 ? (
+                  <>
+                    <RatingComponent rating={Math.round(product.ratings)} />
+
+                    <p className="text-sm text-gray-400 ml-2">
+                      From {product.reviews.length}{" "}
+                      {product.reviews.length > 1 ? "Reviewers" : "Reviewer"}
+                    </p>
+                  </>
+                ) : (
+                  <div>No Product Reviews</div>
+                )}
               </div>
               <p className="flex items-center gap-5 mt-5">
                 <div className="flex flex-col">
@@ -251,22 +272,37 @@ export default function ProductPage() {
           {/* description and product review section */}
           <div className="mt-10">
             <div className="flex">
-              <p className="border px-5 py-3 text-sm">Description</p>
-              <p className="border px-5 py-3 text-sm">Reviews (122)</p>
+              <p className="border border-solid border-b-transparent border-gray-300 px-4 py-3 text-sm rounded-tl-md rounded-tr-md">
+                {product.reviews.length > 0 ? product.reviews.length : ""}{" "}
+                {product.reviews.length === 0
+                  ? "No User Reviews"
+                  : product.reviews.length > 1
+                  ? "User Reviews"
+                  : "User Review"}
+              </p>
             </div>
-            <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Expedita, asperiores officiis inventore eum voluptas doloribus.
-                Culpa, sint molestias? Atque natus non possimus repellendus ipsa
-                ut, laudantium placeat mollitia nam fuga!
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Mollitia inventore voluptates nemo illo blanditiis soluta,
-                praesentium est illum? Unde error incidunt ab eius adipisci modi
-                itaque consequuntur, dicta tempora nesciunt.
-              </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 border border-l-transparent border-r-transparent border-b-transparent border-solid border-gray-300 text-sm text-gray-500 px-2 py-2">
+              {product.reviews.length > 0 ? (
+                product.reviews?.slice(0, 6).map((review, index) => {
+                  return (
+                    <ReviewDisplayComponent
+                      key={index}
+                      avatar={review.buyer.avatar}
+                      name={review.buyer.fullname}
+                      stars={review.rating}
+                      comment={review.comment}
+                      createdAt={review.createdAt}
+                    />
+                  );
+                })
+              ) : (
+                <div className="w-full p-4 text-center">
+                  <p>
+                    <span className="font-bold">{product.product_name}</span>{" "}
+                    has not been reviewed yet.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
