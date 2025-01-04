@@ -31,8 +31,6 @@ export default function CollectionsPage() {
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("relevant");
 
-  console.log(products);
-
   const getData = async () => {
     try {
       // dispatch(setLoader(true));
@@ -87,7 +85,7 @@ export default function CollectionsPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 type="text"
                 placeholder="Search products here ..."
-                className="border border-gray-300 rounded-full border-solid pl-8 p-2 h-14 flex-1"
+                className="border border-gray-300 input-rounded-full border-solid pl-8 p-2 h-14 flex-1"
               />
               <IoSearchOutline className="absolute left-2 w-5 h-5" />
             </div>
@@ -104,7 +102,7 @@ export default function CollectionsPage() {
                 key={index}
                 id={product._id}
                 name={product.product_name}
-                category={product.category}
+                category={product.category.split("_").join(" & ")}
                 description={product.product_description}
                 delivery={product.deliveryincluded}
                 asking_price={product.asking_price}

@@ -5,13 +5,9 @@ import { setLoader } from "../../redux/loaderSlice";
 import { MdDeleteForever } from "react-icons/md";
 import { EditUser, UploadUserImage } from "../../apiCalls/users";
 
-export default function UserImages({
-  selectedUser,
-  setShowEditUser,
-  // getData,
-}) {
+export default function UserImages({ selectedUser, setShowEditUser }) {
   const [file, setFile] = useState(null);
-  const [images, setImages] = useState(selectedUser.images);
+  const [images, setImages] = useState(selectedUser.avatar);
   const [showPreview, setShowPreview] = useState(true);
   const dispatch = useDispatch();
 
@@ -25,10 +21,11 @@ export default function UserImages({
       dispatch(setLoader(false));
       if (response.success) {
         message.success(response.message);
-        setImages([...images, response.data]);
+        setImages(response.data);
         setShowPreview(false);
         setFile(null);
-        // getData();
+        setShowEditUser(false);
+        window.location.href = "/seller-profile";
       } else {
         message.error(response.message);
       }
@@ -41,8 +38,8 @@ export default function UserImages({
   const deleteImage = async (image) => {
     try {
       dispatch(setLoader(true));
-      const updatedImagesArray = images.filter((img) => img !== image);
-      const updatedUser = { ...selectedUser, images: updatedImagesArray };
+      // const updatedImagesArray = images.filter((img) => img !== image);
+      const updatedUser = { ...selectedUser, images };
 
       const response = await EditUser(selectedUser._id, updatedUser);
 
@@ -64,17 +61,15 @@ export default function UserImages({
     <div>
       {/* display user images */}
       <div className="flex gap-5 flex-wrap">
-        {images?.map((image) => {
-          return (
-            <div className="flex gap-2 border border-solid border-gray-300 rounded p-3 mb-4 items-end">
-              <img src={image} alt="" className="h-20 w-20 object-cover" />
-              <MdDeleteForever
-                onClick={() => deleteImage(image)}
-                className="h-5 w-5 cursor-pointer text-red-500 hover:scale-110 transition-all duration-300"
-              />
-            </div>
-          );
-        })}
+        {images && (
+          <div className="flex gap-2 border border-solid border-gray-300 rounded p-3 mb-4 items-end">
+            <img src={images} alt="" className="h-20 w-20 object-cover" />
+            <MdDeleteForever
+              onClick={() => deleteImage(images)}
+              className="h-5 w-5 cursor-pointer text-red-500 hover:scale-110 transition-all duration-300"
+            />
+          </div>
+        )}
       </div>
 
       {/* upload product image */}

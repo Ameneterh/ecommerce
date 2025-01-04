@@ -39,10 +39,9 @@ export default function LatestCollection() {
       <div className="text-center py-8 text-3xl">
         <TitleText text1={"latest"} text2={"collection"} />
         <p className="w-3/4 mx-auto text-xs sm:text-sm md:text-base text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quod
-          tempora fuga ullam explicabo sint quidem ipsum? Officia dolores iusto
-          quod culpa. A reprehenderit ullam modi inventore dolore, error
-          excepturi!
+          Discover our latest collection, where cutting-edge design meets
+          timeless elegance. From bold statement pieces to subtle essentials,
+          each item is crafted with quality and style in mind.
         </p>
       </div>
 
@@ -54,8 +53,8 @@ export default function LatestCollection() {
             id={product._id}
             image={product.images[0]}
             name={product.product_name}
-            category={product.category}
-            price={product.asking_price}
+            category={product.category.split("_").join(" & ")}
+            asking_price={product.asking_price}
           />
         ))}
       </div>

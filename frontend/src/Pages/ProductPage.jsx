@@ -70,7 +70,7 @@ export default function ProductPage() {
     <MainLayout>
       {product ? (
         <div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
             {/* product images */}
             <div className="flex flex-col gap-2">
               <img
@@ -227,37 +227,39 @@ export default function ProductPage() {
                 </div>
 
                 {/* show bids on product page */}
-                {product.showBidsOnProductsPage &&
-                  product.bids.map((bid, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className="border border-gray-300 border-solid p-2 rounded bg-gray-50 mt-1"
-                      >
-                        <div className="grid grid-cols-3 text-gray-700 text-sm">
-                          <span>Name of Bidder:</span>
-                          <span className="font-bold">
-                            {bid.buyer.fullname}
-                          </span>
+                <div className="flex items-center flex-col lg:flex-row gap-2 w-full">
+                  {product.showBidsOnProductsPage &&
+                    product.bids.map((bid, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="border border-gray-300 border-solid p-2 rounded bg-gray-50 mt-1 flex-1 w-full"
+                        >
+                          <div className="grid grid-cols-[0.5fr_1fr] text-gray-700 text-xs">
+                            <span>Bidder's Name:</span>
+                            <span className="font-bold">
+                              {bid.buyer.fullname}
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-[0.5fr_1fr] text-gray-600 text-xs">
+                            <span>Bid Amount:</span>
+                            <span className="font-bold flex items-center">
+                              {currency}
+                              {bid.bidAmount.toLocaleString()}
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-[0.5fr_1fr] text-gray-600 text-xs">
+                            <span>Date Bidded:</span>
+                            <span className="font-bold flex items-center">
+                              {moment(bid.createdAt).format(
+                                "MMM DD, YYYY, h:mm A"
+                              )}
+                            </span>
+                          </div>
                         </div>
-                        <div className="grid grid-cols-3 text-gray-600 text-sm">
-                          <span>Amount Bidded:</span>
-                          <span className="font-bold flex items-center">
-                            {currency}
-                            {bid.bidAmount.toLocaleString()}
-                          </span>
-                        </div>
-                        <div className="grid grid-cols-3 text-gray-600 text-sm">
-                          <span>Date Bidded:</span>
-                          <span className="font-bold flex items-center">
-                            {moment(bid.createdAt).format(
-                              "MMM DD, YYYY, h:mm A"
-                            )}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                </div>
 
                 {showAddBidsModal && (
                   <BidsModal

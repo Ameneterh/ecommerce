@@ -17,6 +17,7 @@ export default function EditUserForm({
   showEditUser,
   setShowEditUser,
   selectedUser,
+  // getData,
 }) {
   const formRef = React.useRef(null);
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ export default function EditUserForm({
           activeKey={selectedTab}
           onChange={(key) => setSelectedTab(key)}
         >
-          <Tabs.TabPane tab="Product Info" key="1">
+          <Tabs.TabPane tab="User Details" key="1">
             <Form layout="vertical" ref={formRef} onFinish={handleFormSubmit}>
               <div className="flex flex-col sm:flex-row gap-2 w-full">
                 <Form.Item
@@ -123,7 +124,7 @@ export default function EditUserForm({
               </div>
             </Form>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Product Images" key="2" disabled={!selectedUser}>
+          <Tabs.TabPane tab="User Image" key="2" disabled={!selectedUser}>
             <UserImages
               selectedUser={selectedUser}
               setShowEditUser={setShowEditUser}

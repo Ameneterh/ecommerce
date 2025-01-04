@@ -158,9 +158,7 @@ router.post(
       });
 
       const userId = req.body.userId;
-      await User.findByIdAndUpdate(userId, {
-        $push: { images: result.secure_url },
-      });
+      await User.findByIdAndUpdate(userId, { avatar: result.secure_url });
       res.send({
         success: true,
         message: "Image uploaded successfully",

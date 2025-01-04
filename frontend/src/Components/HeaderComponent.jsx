@@ -81,7 +81,7 @@ export default function HeaderComponent() {
   return (
     <div className="flex items-center justify-between py-5 px-2 font-medium sticky top-0 z-40 text-[12px] bg-white border-t-0 border-l-0 border-r-0 border-b-[1.5px] border-solid border-b-gray-300">
       <Link to="/">
-        <img src={assets.nav_img} className="w-36 sm:w-56" />
+        <img src={assets.nav_img} className="w-36 sm:w-56 rounded-full" />
       </Link>
 
       {/* links */}
@@ -110,7 +110,10 @@ export default function HeaderComponent() {
           <div className="flex items-center gap-1">
             <div className="group relative">
               <div className="">
-                <img src={user.avatar} className="w-12 cursor-pointer" />
+                <img
+                  src={user.avatar}
+                  className="w-10 cursor-pointer rounded-full"
+                />
               </div>
               <div className="group-hover:block hidden absolute dropdown-menu right-0 bg-gray-50 overflow-hidden">
                 <div className="p-2 font-normal">

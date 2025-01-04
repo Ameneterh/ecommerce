@@ -1,5 +1,5 @@
 import { Input } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 
 export default function ProductFiltersComponent({
@@ -35,11 +35,11 @@ export default function ProductFiltersComponent({
     },
     {
       name: "Kids",
-      value: "kids",
+      value: "kids_babies",
     },
     {
       name: "Agric & Foods",
-      value: "agric_foods",
+      value: "agric_food",
     },
     {
       name: "General",
@@ -48,34 +48,99 @@ export default function ProductFiltersComponent({
   ];
 
   const sub_categories = [
+    // for health & beauty 0-5
     {
       name: "Accessories",
-      value: "accessories",
+      value: "beauty_accessories",
     },
     {
-      name: "Bags",
-      value: "bags",
+      name: "Cosmetics",
+      value: "cosmetics",
     },
     {
       name: "Hairs",
       value: "hairs",
     },
     {
+      name: "Make Ups",
+      value: "make_ups",
+    },
+    {
       name: "Perfumes",
       value: "perfumes",
+    },
+
+    // for fashion & wears 5-12
+    {
+      name: "Bags & Caps/Hats",
+      value: "bags_caps",
+    },
+    {
+      name: "Clothing",
+      value: "clothing",
+    },
+    {
+      name: "Accessories",
+      value: "clothing_accessories",
+    },
+    {
+      name: "Jewellery",
+      value: "jewellery",
     },
     {
       name: "Shoes",
       value: "shoes",
     },
     {
-      name: "Wears",
-      value: "wears",
+      name: "Watches",
+      value: "watches",
+    },
+    {
+      name: "Glasses",
+      value: "glasses",
+    },
+
+    // for kids & babies 12-15
+    {
+      name: "Clothing",
+      value: "clothing",
+    },
+    {
+      name: "Shoes",
+      value: "shoes",
+    },
+    {
+      name: "Toys",
+      value: "toys",
+    },
+
+    // for agric & foods 15-18
+    {
+      name: "Baked",
+      value: "baked",
+    },
+    {
+      name: "Fried",
+      value: "fried",
+    },
+    {
+      name: "Fresh",
+      value: "fresh",
+    },
+    {
+      name: "Drinks",
+      value: "drinks",
     },
   ];
 
+  console.log(filters.category);
+
+  useEffect(() => {
+    console.log(filters.category);
+  }, [filters]);
+
   return (
-    <div className="min-w-32 flex flex-col">
+    <div className="min-w-36 flex flex-col">
       <div className="flex justify-between">
         <p className="text-primary">Filters</p>
         <IoClose
@@ -90,7 +155,7 @@ export default function ProductFiltersComponent({
         <div className="flex flex-col gap-1">
           {categories.map((category, index) => {
             return (
-              <div key={index} className="flex items-center gap-2 text-sm">
+              <div key={index} className="flex items-center gap-2 text-sm h-6">
                 <input
                   type="checkbox"
                   name="category"
@@ -121,39 +186,143 @@ export default function ProductFiltersComponent({
         <hr className="h-[1.5px] bg-gray-300 my-3" />
 
         {/* sub categories */}
-        <p className="text-sm font-medium">TYPE</p>
+        <p className="text-sm font-medium">SUB CATEGORY</p>
         <div className="flex flex-col gap-1">
-          {sub_categories.map((sub_category) => {
-            return (
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  name="sub_category"
-                  className="max-width"
-                  checked={filters.sub_category.includes(sub_category.value)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setFilters({
-                        ...filters,
-                        sub_category: [
-                          ...filters.sub_category,
-                          sub_category.value,
-                        ],
-                      });
-                    } else {
-                      setFilters({
-                        ...filters,
-                        sub_category: filters.sub_category.filter(
-                          (item) => item !== sub_category.value
-                        ),
-                      });
-                    }
-                  }}
-                />
-                <label htmlFor="sub_category">{sub_category.name}</label>
-              </div>
-            );
-          })}
+          {/* health & beauty */}
+          {filters.category.includes("health_beauty") &&
+            sub_categories.slice(0, 5).map((sub_category) => {
+              return (
+                <div className="flex items-center gap-2 text-sm h-6">
+                  <input
+                    type="checkbox"
+                    name="sub_category"
+                    className="max-width"
+                    checked={filters.sub_category.includes(sub_category.value)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setFilters({
+                          ...filters,
+                          sub_category: [
+                            ...filters.sub_category,
+                            sub_category.value,
+                          ],
+                        });
+                      } else {
+                        setFilters({
+                          ...filters,
+                          sub_category: filters.sub_category.filter(
+                            (item) => item !== sub_category.value
+                          ),
+                        });
+                      }
+                    }}
+                  />
+                  <label htmlFor="sub_category">{sub_category.name}</label>
+                </div>
+              );
+            })}
+
+          {/* fashion & wears */}
+          {filters.category.includes("fashion_wears") &&
+            sub_categories.slice(5, 12).map((sub_category) => {
+              return (
+                <div className="flex items-center gap-2 text-sm h-6">
+                  <input
+                    type="checkbox"
+                    name="sub_category"
+                    className="max-width"
+                    checked={filters.sub_category.includes(sub_category.value)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setFilters({
+                          ...filters,
+                          sub_category: [
+                            ...filters.sub_category,
+                            sub_category.value,
+                          ],
+                        });
+                      } else {
+                        setFilters({
+                          ...filters,
+                          sub_category: filters.sub_category.filter(
+                            (item) => item !== sub_category.value
+                          ),
+                        });
+                      }
+                    }}
+                  />
+                  <label htmlFor="sub_category">{sub_category.name}</label>
+                </div>
+              );
+            })}
+
+          {/* kids & babies */}
+          {filters.category.includes("kids_babies") &&
+            sub_categories.slice(12, 15).map((sub_category) => {
+              return (
+                <div className="flex items-center gap-2 text-sm h-6">
+                  <input
+                    type="checkbox"
+                    name="sub_category"
+                    className="max-width"
+                    checked={filters.sub_category.includes(sub_category.value)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setFilters({
+                          ...filters,
+                          sub_category: [
+                            ...filters.sub_category,
+                            sub_category.value,
+                          ],
+                        });
+                      } else {
+                        setFilters({
+                          ...filters,
+                          sub_category: filters.sub_category.filter(
+                            (item) => item !== sub_category.value
+                          ),
+                        });
+                      }
+                    }}
+                  />
+                  <label htmlFor="sub_category">{sub_category.name}</label>
+                </div>
+              );
+            })}
+
+          {/* kids & babies */}
+          {filters.category.includes("agric_food") &&
+            sub_categories.slice(15).map((sub_category) => {
+              return (
+                <div className="flex items-center gap-2 text-sm h-6">
+                  <input
+                    type="checkbox"
+                    name="sub_category"
+                    className="max-width"
+                    checked={filters.sub_category.includes(sub_category.value)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setFilters({
+                          ...filters,
+                          sub_category: [
+                            ...filters.sub_category,
+                            sub_category.value,
+                          ],
+                        });
+                      } else {
+                        setFilters({
+                          ...filters,
+                          sub_category: filters.sub_category.filter(
+                            (item) => item !== sub_category.value
+                          ),
+                        });
+                      }
+                    }}
+                  />
+                  <label htmlFor="sub_category">{sub_category.name}</label>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

@@ -52,6 +52,13 @@ export default function AdminUsers() {
 
   const columns = [
     {
+      title: "User Image",
+      dataIndex: "avatar",
+      render: (text, record) => {
+        return <img src={record.avatar} alt="" className="h-12 w-1/2" />;
+      },
+    },
+    {
       title: "User Full Name",
       dataIndex: "fullname",
     },

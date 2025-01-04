@@ -54,3 +54,7 @@ table {
 .max-width {
   max-width: max-content !important;
 }
+
+.input-rounded-full {
+  border-radius: 25px !important;
+}

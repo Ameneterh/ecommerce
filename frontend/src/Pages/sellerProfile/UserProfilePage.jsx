@@ -101,6 +101,7 @@ export default function UserProfilePage() {
           showEditUser={showEditUser}
           setShowEditUser={setShowEditUser}
           selectedUser={user}
+          // getData={getData}
         />
       )}
     </div>
