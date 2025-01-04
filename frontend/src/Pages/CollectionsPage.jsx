@@ -18,36 +18,49 @@ export default function CollectionsPage() {
     status: "approved",
     category: [],
     sub_category: [],
+    searchTerm: "",
   });
   const [showFilters, setShowFilters] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { user } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
-  const { search, showSearch } = useContext(ShopContext);
   const [filterProducts, setFlterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("relevant");
 
+  console.log(products);
+
   const getData = async () => {
     try {
-      dispatch(setLoader(true));
+      // dispatch(setLoader(true));
       const response = await GetProducts(filters);
-      dispatch(setLoader(false));
+      // dispatch(setLoader(false));
 
       if (response.success) {
-        setProducts(response.data);
+        let productsCopy = response.data.slice();
+        if (searchTerm) {
+          productsCopy = productsCopy.filter((item) =>
+            item.product_name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
+        setProducts(productsCopy);
       }
     } catch (error) {
-      dispatch(setLoader(false));
+      // dispatch(setLoader(false));
       message.error(error.message);
     }
   };
 
   useEffect(() => {
     getData();
-  }, [filters]);
+  }, [filters, searchTerm]);
+
+  // useEffect(() => {
+  //   setFlterProducts(productsCopy);
+  // }, [filters, searchTerm]);
 
   return (
     <MainLayout>
@@ -71,8 +84,11 @@ export default function CollectionsPage() {
                 <MdFilterList className="w-5 h-5" />
               </div>
             )}
+
+            {/* search bar */}
             <div className="w-full flex items-center relative">
               <input
+                onChange={(e) => setSearchTerm(e.target.value)}
                 type="text"
                 placeholder="Search products here ..."
                 className="border border-gray-300 rounded-full border-solid pl-8 p-2 h-14 flex-1"
