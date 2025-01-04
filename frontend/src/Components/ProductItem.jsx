@@ -34,7 +34,7 @@ export default function ProductItem({
           <p className="">Category: </p>
           <p className="capitalize">{category}</p>
         </div>
-        <p className="text-xs line-clamp-3 mb-1">{description}</p>
+        <p className="text-xs line-clamp-2 mb-1">{description}</p>
         <hr className="h-[1.5px] bg-gray-400" />
         <p className="flex items-center justify-between">
           <span className="text-sm font-medium flex items-center  text-green-800">

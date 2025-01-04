@@ -118,10 +118,11 @@ export default function SellerProductForm({
                   >
                     <select name="" id="">
                       <option value="">Select category</option>
-                      <option value="gentlemen">Gentlemen</option>
-                      <option value="ladies">Ladies</option>
-                      <option value="kids">Kids</option>
-                      <option value="general">general</option>
+                      <option value="health_beauty">Health & Beauty</option>
+                      <option value="fashion_wears">Fashion & Wears</option>
+                      <option value="kids_babies">Kids & Babies</option>
+                      <option value="agric_food">Agric & Foods</option>
+                      <option value="general">General</option>
                     </select>
                   </Form.Item>
                 </Col>

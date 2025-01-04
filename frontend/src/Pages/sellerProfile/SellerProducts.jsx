@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../../redux/loaderSlice";
 import { DeleteProduct, GetProducts } from "../../apiCalls/products";
 import BidsComponent from "./BidsComponent";
+import { Link } from "react-router-dom";
 
 // products from tutorial
 export default function SellerProducts() {
@@ -61,23 +62,23 @@ export default function SellerProducts() {
       dataIndex: "product_name",
       render: (text, record) => {
         return (
-          <div className="max-w-[100px] line-clamp-2">
-            {record.product_name}
+          <div className="max-w-[200px] line-clamp-2">
+            <Link to={`/product/${record._id}`}>{record.product_name}</Link>
           </div>
         );
       },
     },
-    {
-      title: "Product Description",
-      dataIndex: "product_description",
-      render: (text, record) => {
-        return (
-          <div className="max-w-[300px] line-clamp-3">
-            {record.product_description}
-          </div>
-        );
-      },
-    },
+    // {
+    //   title: "Product Description",
+    //   dataIndex: "product_description",
+    //   render: (text, record) => {
+    //     return (
+    //       <div className="max-w-[300px] line-clamp-3">
+    //         {record.product_description}
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       title: "Category",
       dataIndex: "category",

@@ -26,20 +26,24 @@ export default function ProductFiltersComponent({
 
   const categories = [
     {
-      name: "Gentlemen",
-      value: "gentlemen",
+      name: "Health & Beauty",
+      value: "health_beauty",
     },
     {
-      name: "Ladies",
-      value: "ladies",
+      name: "Fashion & Wears",
+      value: "fashion_wears",
     },
     {
       name: "Kids",
       value: "kids",
     },
     {
-      name: "Unisex",
-      value: "unisex",
+      name: "Agric & Foods",
+      value: "agric_foods",
+    },
+    {
+      name: "General",
+      value: "general",
     },
   ];
 
@@ -71,7 +75,7 @@ export default function ProductFiltersComponent({
   ];
 
   return (
-    <div className="max-w-72 flex flex-col">
+    <div className="min-w-32 flex flex-col">
       <div className="flex justify-between">
         <p className="text-primary">Filters</p>
         <IoClose
@@ -86,7 +90,7 @@ export default function ProductFiltersComponent({
         <div className="flex flex-col gap-1">
           {categories.map((category) => {
             return (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-sm">
                 <input
                   type="checkbox"
                   name="category"

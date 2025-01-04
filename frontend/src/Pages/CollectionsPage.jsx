@@ -20,7 +20,7 @@ export default function CollectionsPage() {
     sub_category: [],
     searchTerm: "",
   });
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const { user } = useSelector((state) => state.users);
@@ -57,10 +57,6 @@ export default function CollectionsPage() {
   useEffect(() => {
     getData();
   }, [filters, searchTerm]);
-
-  // useEffect(() => {
-  //   setFlterProducts(productsCopy);
-  // }, [filters, searchTerm]);
 
   return (
     <MainLayout>
