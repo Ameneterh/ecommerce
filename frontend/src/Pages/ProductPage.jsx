@@ -158,7 +158,9 @@ export default function ProductPage() {
               <div className="flex flex-col text-gray-700 mt-3 text-sm">
                 <div className="grid grid-cols-2">
                   <p>Category:</p>
-                  <p className="capitalize">{product.category}</p>
+                  <p className="capitalize">
+                    {product.category.split("_").join(" & ")}
+                  </p>
                 </div>
                 <div className="grid grid-cols-2">
                   <p>Sub Category:</p>
@@ -167,7 +169,7 @@ export default function ProductPage() {
                 <div className="grid grid-cols-2">
                   <p>Pay on Delivery:</p>
                   <p className="capitalize">
-                    {product.sub_category ? "Yes" : "No"}
+                    {product.payondelivery ? "Yes" : "No"}
                   </p>
                 </div>
               </div>
@@ -190,14 +192,14 @@ export default function ProductPage() {
                   <p>Seller's Phone:</p>
                   <div className="flex gap-2">
                     <Link
-                      to=""
+                      to={`tel:+${product.seller.phone}`}
                       className="flex items-center p-1 text-blue-500 hover:bg-blue-100 gap-1 rounded"
                     >
                       <MdCall className="w-4 h-4" />
                       Call
                     </Link>
                     <Link
-                      to=""
+                      to={`https://wa.me/${product.seller.phone}`}
                       className="flex items-center p-1 text-green-500 hover:bg-green-50 gap-1 rounded"
                     >
                       <FaSquareWhatsapp className="w-4 h-4" />

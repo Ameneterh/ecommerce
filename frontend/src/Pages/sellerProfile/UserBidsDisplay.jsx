@@ -36,7 +36,13 @@ export default function UserBidsDisplay() {
       title: "Product",
       dataIndex: "product",
       render: (text, record) => {
-        return record.product.product_name;
+        return (
+          <div className="max-w-[200px] line-clamp-2">
+            <Link to={`/product/${record.product._id}`}>
+              {record.product.product_name}
+            </Link>
+          </div>
+        );
       },
     },
     {

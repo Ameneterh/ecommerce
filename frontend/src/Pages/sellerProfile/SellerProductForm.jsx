@@ -35,6 +35,16 @@ export default function SellerProductForm({
   const { user } = useSelector((state) => state.users);
   const [selectedTab, setSelectedTab] = useState("1");
 
+  const [category, setCategory] = useState(null);
+
+  const handleChange = (e) => {
+    setCategory(e.target.value);
+  };
+
+  useEffect(() => {
+    setCategory(selectedProduct?.category);
+  }, []);
+
   useEffect(() => {
     if (selectedProduct) {
       formRef.current.setFieldsValue(selectedProduct);
@@ -99,8 +109,8 @@ export default function SellerProductForm({
                 <TextArea type="text" />
               </Form.Item>
 
-              <Row gutter={[16, 16]}>
-                <Col span={8}>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
                   <Form.Item
                     label="Asking Price"
                     name="asking_price"
@@ -108,15 +118,15 @@ export default function SellerProductForm({
                   >
                     <Input type="number" />
                   </Form.Item>
-                </Col>
-                <Col span={8}>
+                </div>
+                <div>
                   <Form.Item
                     label="Category"
                     name="category"
                     rules={rules}
                     className="rounded-md"
                   >
-                    <select name="" id="">
+                    <select name="" id="" onChange={handleChange}>
                       <option value="">Select category</option>
                       <option value="health_beauty">Health & Beauty</option>
                       <option value="fashion_wears">Fashion & Wears</option>
@@ -125,30 +135,102 @@ export default function SellerProductForm({
                       <option value="general">General</option>
                     </select>
                   </Form.Item>
-                </Col>
-                <Col span={8}>
-                  <Form.Item
-                    label="Sub Category"
-                    name="sub_category"
-                    rules={rules}
-                  >
-                    <select name="" id="">
-                      <option value="">Select sub category</option>
-                      <option value="accessories">Accessories</option>
-                      <option value="cosmetics">Cosmetics</option>
-                      <option value="perfumes">Perfumes</option>
-                      <option value="shoes">Shoes</option>
-                      <option value="bags">Bags</option>
-                      <option value="hairs">Hairs</option>
-                    </select>
-                  </Form.Item>
-                </Col>
-              </Row>
+                </div>
+                <div>
+                  {/* health & beauty sub category */}
+                  {category === "health_beauty" && (
+                    <Form.Item
+                      label="Sub Category"
+                      name="sub_category"
+                      rules={rules}
+                    >
+                      <select name="" id="">
+                        <option value="">Select sub category</option>
+                        <option value="beauty_accessories">Accessories</option>
+                        <option value="cosmetics">Cosmetics</option>
+                        <option value="hairs">Hairs</option>
+                        <option value="make_ups">Make Ups</option>
+                        <option value="perfumes">Perfumes</option>
+                      </select>
+                    </Form.Item>
+                  )}
 
-              <div className="flex gap-10">
+                  {/* fashion & beauty sub category */}
+                  {category === "fashion_wears" && (
+                    <Form.Item
+                      label="Sub Category"
+                      name="sub_category"
+                      rules={rules}
+                    >
+                      <select name="" id="">
+                        <option value="">Select sub category</option>
+                        <option value="bags_caps">Bags & Caps/Hats</option>
+                        <option value="clothing">Clothing & Wears</option>
+                        <option value="clothing_accessories">
+                          Accessories
+                        </option>
+                        <option value="jewellery">Jewellery</option>
+                        <option value="shoes">Shoes & Foot Wear</option>
+                        <option value="watches">Watches</option>
+                        <option value="glasses">Glasses</option>
+                      </select>
+                    </Form.Item>
+                  )}
+
+                  {/* kids_babies sub category */}
+                  {category === "kids_babies" && (
+                    <Form.Item
+                      label="Sub Category"
+                      name="sub_category"
+                      rules={rules}
+                    >
+                      <select name="" id="">
+                        <option value="">Select sub category</option>
+                        <option value="clothing">Clothing & Wears</option>
+                        <option value="shoes">Shoes</option>
+                        <option value="toys">Toys</option>
+                      </select>
+                    </Form.Item>
+                  )}
+
+                  {/* agric & foods sub category */}
+                  {category === "agric_food" && (
+                    <Form.Item
+                      label="Sub Category"
+                      name="sub_category"
+                      rules={rules}
+                    >
+                      <select name="" id="">
+                        <option value="">Select sub category</option>
+                        <option value="baked">Baked Foods</option>
+                        <option value="fried">Fried Foods</option>
+                        <option value="fresh">Fresh Foods</option>
+                        <option value="drinks">Drinks</option>
+                      </select>
+                    </Form.Item>
+                  )}
+
+                  {/* agric & foods sub category */}
+                  {category === "general" && (
+                    <Form.Item
+                      label="Sub Category"
+                      name="sub_category"
+                      rules={rules}
+                    >
+                      <select name="" id="">
+                        <option value="">Select sub category</option>
+                        <option value="unspecified">Unspecified</option>
+                      </select>
+                    </Form.Item>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex justify-between">
                 {additionalThings.map((item, index) => {
                   return (
                     <Form.Item
+                      layout="horizontal"
                       label={item.label}
                       name={item.name}
                       key={index}
@@ -169,27 +251,44 @@ export default function SellerProductForm({
                 })}
               </div>
 
-              <Row>
-                <Col span={8}>
-                  <Form.Item
-                    label="Show Bids on Product Page"
-                    name="showBidsOnProductsPage"
-                    valuePropName="checked"
-                  >
-                    <Input
-                      type="checkbox"
-                      onChange={(e) => {
-                        formRef.current.setFieldsValue({
-                          showBidsOnProductPage: e.target.checked,
-                        });
-                      }}
-                      checked={formRef.current?.getFieldValue(
-                        "showBidsOnProductsPage"
-                      )}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
+              <div className="flex justify-between">
+                <Form.Item
+                  layout="horizontal"
+                  label="Show Bids on Product Page"
+                  name="showBidsOnProductsPage"
+                  valuePropName="checked"
+                >
+                  <Input
+                    type="checkbox"
+                    onChange={(e) => {
+                      formRef.current.setFieldsValue({
+                        showBidsOnProductPage: e.target.checked,
+                      });
+                    }}
+                    checked={formRef.current?.getFieldValue(
+                      "showBidsOnProductsPage"
+                    )}
+                  />
+                </Form.Item>
+                {/* <Form.Item
+                  layout="horizontal"
+                  label="Show Bids on Product Page"
+                  name="showBidsOnProductsPage"
+                  valuePropName="checked"
+                >
+                  <Input
+                    type="checkbox"
+                    onChange={(e) => {
+                      formRef.current.setFieldsValue({
+                        showBidsOnProductPage: e.target.checked,
+                      });
+                    }}
+                    checked={formRef.current?.getFieldValue(
+                      "showBidsOnProductsPage"
+                    )}
+                  />
+                </Form.Item> */}
+              </div>
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane

@@ -9,8 +9,6 @@ export default function RelatedProducts({ category, seller, currentProduct }) {
   const [products, setProducts] = useState(null);
   const [related, setRelated] = useState(null);
 
-  console.log(products);
-
   const getData = async () => {
     const filters = {
       category: category,

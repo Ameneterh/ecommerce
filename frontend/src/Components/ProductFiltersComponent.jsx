@@ -88,9 +88,9 @@ export default function ProductFiltersComponent({
       <div className="flex flex-col gap-1 mt-3">
         <p className="text-sm font-medium">CATEGORIES</p>
         <div className="flex flex-col gap-1">
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             return (
-              <div className="flex items-center gap-2 text-sm">
+              <div key={index} className="flex items-center gap-2 text-sm">
                 <input
                   type="checkbox"
                   name="category"

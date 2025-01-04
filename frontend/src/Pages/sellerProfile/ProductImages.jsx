@@ -64,9 +64,12 @@ export default function ProductImages({
     <div>
       {/* display product images */}
       <div className="flex gap-5 flex-wrap">
-        {images.map((image) => {
+        {images.map((image, index) => {
           return (
-            <div className="flex gap-2 border border-solid border-gray-300 rounded p-3 mb-4 items-end">
+            <div
+              key={index}
+              className="flex gap-2 border border-solid border-gray-300 rounded p-3 mb-4 items-end"
+            >
               <img src={image} alt="" className="h-20 w-20 object-cover" />
               <MdDeleteForever
                 onClick={() => deleteImage(image)}
