@@ -7,7 +7,7 @@ import { MdMarkEmailUnread, MdPhoneInTalk, MdWhatsapp } from "react-icons/md";
 export default function PrivacyPolicy() {
   return (
     <MainLayout>
-      <div className="flex flex-col min-h-screen text-xs max-w-2xl mx-auto gap-5 mb-20">
+      <div className="flex flex-col min-h-screen text-xs max-w-2xl mx-auto gap-5 mb-20 mt-8">
         <div className="text-2xl text-center">
           <TitleText text1={"privacy"} text2={"policy"} />
         </div>
@@ -30,14 +30,14 @@ export default function PrivacyPolicy() {
         <p>
           While using our site sorely for shopping do not require registration,
           if you do wish to become a vendor through myeSHOP platform, you will
-          be required to register. We collect various types of personal
-          information from registrants to provide you with a seamless
-          experience:
+          be required to register. We collect various types of personal and
+          non-personal information from registrants and site users to provide a
+          seamless experience:
         </p>
         <p>
           <b>- Personal Identification Information:</b> This includes your name,
-          email address, shipping address, phone number, and payment details
-          (billing address, etc.).
+          email address, phone number; Vendors may require your payment details
+          including shipping address.
         </p>
         <p>
           <b>- Non-Personal Identification Information:</b> This includes data
@@ -87,7 +87,7 @@ export default function PrivacyPolicy() {
         </p>
         <p>
           <b>- Service Providers:</b> We may share data with trusted third-party
-          vendors who assist with processing payments, shipping, marketing, and
+          vendors who assist with our services, including marketing, and
           customer service. These service providers are obligated to keep your
           information secure and use it only for the services they perform for
           us.

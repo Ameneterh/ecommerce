@@ -7,7 +7,7 @@ import { MdMarkEmailUnread, MdPhoneInTalk, MdWhatsapp } from "react-icons/md";
 export default function TermsOfUse() {
   return (
     <MainLayout>
-      <div className="flex flex-col min-h-screen text-xs max-w-2xl mx-auto gap-5 mb-20">
+      <div className="flex flex-col min-h-screen text-xs max-w-2xl mx-auto gap-5 mb-20 mt-8">
         <div className="text-2xl text-center">
           <TitleText text1={"terms"} text2={"of use"} />
         </div>
@@ -28,16 +28,16 @@ export default function TermsOfUse() {
         <p>
           By using our Site, you agree to these Terms of Use and any updates or
           modifications to them. We reserve the right to change these Terms at
-          any time, and the updated version will be posted on the Site. Please
-          review these Terms regularly.
+          any time without prior notification, and the updated version will be
+          posted on the Site. Please review these Terms regularly.
         </p>
         <h1 className="text-[14px]">2. Account Registration</h1>
         <p>
-          We do not require you to create account to make a purchase, however,
-          access certain features are restricted to only registered users. To be
-          a vendor (seller) however, you may need to create an account. You
-          agree to provide accurate, up-to-date information, and you are
-          responsible for maintaining the confidentiality of your login
+          We do not require you to create an account to make a purchase,
+          however, access to certain features are restricted to only registered
+          users. To be a vendor (seller) however, you may need to create an
+          account. You agree to provide accurate, up-to-date information, and
+          you are responsible for maintaining the confidentiality of your login
           credentials. Notify us immediately of any unauthorized use of your
           account.
         </p>
@@ -50,8 +50,9 @@ export default function TermsOfUse() {
         </p>
         <p>
           The Vendor must strive to ensure all product descriptions, prices, and
-          images are accurate; the Vendor reserve's the right to correct errors
-          at any time without prior notice.
+          images are accurate; the Vendor reserve's the right to correct errors,
+          update product details including prices, categories, images, etc at
+          any time without prior notice.
         </p>
         <h1 className="text-[14px]">4. Ordering and Payment</h1>
         <p>
@@ -94,7 +95,8 @@ export default function TermsOfUse() {
         <p>
           Product images, and descriptions are property of the Vendors and
           protected by intellectual property laws. You may not copy, modify, or
-          distribute any content without prior written consent.
+          distribute any content without prior written consent or agreement with
+          the Vendor.
         </p>
         <h1 className="text-[14px]">9. Limitation of Liability</h1>
         <p>
@@ -112,18 +114,22 @@ export default function TermsOfUse() {
         <h1 className="text-[14px]">11. Prohibited Activities</h1>
         <p>
           You agree not to:
-          <ul>
-            <li>- Use the Site for fraudulent or unlawful purposes.</li>
+          <ul className="ml-5">
+            <li>Use the Site for fraudulent or unlawful purposes.</li>
             <li>
-              - Use the Site for sales of medicines or other medicinal products,
+              Use the Site for sales of medicines or other medicinal products,
               whether registerd by regulatory agencies or not.
             </li>
             <li>
-              - Interfere with the proper functioning of the Site or attempt to
+              Interfere with the proper functioning of the Site or attempt to
               gain unauthorized access to it.
             </li>
             <li>
-              - Transmit harmful or malicious content, including viruses or
+              Use the Site for the promotion of nudity, pornography, or other
+              sexually explicit material.
+            </li>
+            <li>
+              Transmit harmful or malicious content, including viruses or
               malware.
             </li>
           </ul>
