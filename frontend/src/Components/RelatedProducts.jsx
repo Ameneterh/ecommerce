@@ -38,6 +38,7 @@ export default function RelatedProducts({ category, seller, currentProduct }) {
       setRelated(productsCopy.slice(0, 5));
     }
   }, [products]);
+  console.log(related);
 
   return (
     <div className="mt-8 sm:mt-20">
@@ -45,19 +46,28 @@ export default function RelatedProducts({ category, seller, currentProduct }) {
         <TitleText text1={"related"} text2={"products"} />
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-        {related?.map((product, index) => (
-          <ProductItem
-            key={index}
-            id={product._id}
-            name={product.product_name}
-            category={product.category}
-            delivery={product.deliveryincluded}
-            asking_price={product.asking_price}
-            image={product.images[0]}
-          />
-        ))}
-      </div>
+      <p className="text-center text-sm">
+        Find below related products placed by <b>{seller.fullname}</b>
+      </p>
+      {related === null || related.length === 0 ? (
+        <div className="w-full text-center h-20 flex items-center justify-center">
+          <p className="text-xl prata-regular">No related products found!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6 mt-6 mb-10">
+          {related?.map((product, index) => (
+            <ProductItem
+              key={index}
+              id={product._id}
+              name={product.product_name}
+              category={product.category}
+              delivery={product.deliveryincluded}
+              asking_price={product.asking_price}
+              image={product.images[0]}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

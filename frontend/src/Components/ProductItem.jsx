@@ -16,8 +16,8 @@ export default function ProductItem({
   const { currency } = useContext(ShopContext);
 
   return (
-    <Link
-      to={`/product/${id}`}
+    <a
+      href={`/product/${id}`}
       className="text-gray-700 cursor-pointer border border-solid border-gray-400 rounded-md overflow-hidden"
     >
       {/* <div className="overflow-hidden h-36 sm:h-52"> */}
@@ -50,6 +50,6 @@ export default function ProductItem({
           </span>
         </p>
       </div>
-    </Link>
+    </a>
   );
 }
