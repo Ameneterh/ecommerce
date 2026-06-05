@@ -25,7 +25,7 @@ export default function ProductReviewRating({ getData, product }) {
     };
     try {
       const isReviewed = product.reviews.find(
-        (review) => review.buyer._id.toString() === user._id.toString()
+        (review) => review.buyer._id.toString() === user._id.toString(),
       );
 
       if (isReviewed) {
@@ -76,9 +76,9 @@ export default function ProductReviewRating({ getData, product }) {
   useEffect(() => {
     const updateData = {
       ratings:
-        product.reviews.reduce((acc, item) => item.rating + acc, 0) /
-        product.reviews.length,
-      numOfReviews: product.reviews.length,
+        product?.reviews?.reduce((acc, item) => item?.rating + acc, 0) /
+        product?.reviews?.length,
+      numOfReviews: product?.reviews?.length,
     };
 
     const updateProduct = async () => {
@@ -86,7 +86,7 @@ export default function ProductReviewRating({ getData, product }) {
     };
     updateProduct();
     getData();
-  }, [product.reviews.length]);
+  }, [product?.reviews?.length]);
 
   return (
     <div className="mt-4">

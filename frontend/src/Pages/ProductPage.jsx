@@ -126,7 +126,7 @@ export default function ProductPage() {
               <hr className="my-3" />
               <h1 className="text-xl text-blue-950">Product Details</h1>
               <div className="flex items-center gap-1 mt-5 text-xl text-orange-500">
-                {product.reviews.length > 0 ? (
+                {product?.reviews?.length > 0 ? (
                   <>
                     <RatingComponent rating={Math.round(product.ratings)} />
 
@@ -228,8 +228,8 @@ export default function ProductPage() {
 
                 {/* show bids on product page */}
                 <div className="flex items-center flex-col lg:flex-row gap-2 w-full">
-                  {product.showBidsOnProductsPage &&
-                    product.bids.map((bid, index) => {
+                  {product?.showBidsOnProductsPage &&
+                    product?.bids?.map((bid, index) => {
                       return (
                         <div
                           key={index}
@@ -252,7 +252,7 @@ export default function ProductPage() {
                             <span>Date Bidded:</span>
                             <span className="font-bold flex items-center">
                               {moment(bid.createdAt).format(
-                                "MMM DD, YYYY, h:mm A"
+                                "MMM DD, YYYY, h:mm A",
                               )}
                             </span>
                           </div>
@@ -277,17 +277,17 @@ export default function ProductPage() {
           <div className="mt-10">
             <div className="flex">
               <p className="border border-solid border-b-transparent border-gray-300 px-4 py-3 text-sm rounded-tl-md rounded-tr-md">
-                {product.reviews.length > 0 ? product.reviews.length : ""}{" "}
-                {product.reviews.length === 0
+                {product?.reviews?.length > 0 ? product?.reviews?.length : ""}{" "}
+                {product?.reviews?.length === 0
                   ? "No User Reviews"
-                  : product.reviews.length > 1
-                  ? "User Reviews"
-                  : "User Review"}
+                  : product?.reviews?.length > 1
+                    ? "User Reviews"
+                    : "User Review"}
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 border border-l-transparent border-r-transparent border-b-transparent border-solid border-gray-300 text-sm text-gray-500 px-2 py-2">
-              {product.reviews.length > 0 ? (
-                product.reviews?.slice(0, 6).map((review, index) => {
+              {product?.reviews?.length > 0 ? (
+                product?.reviews?.slice(0, 6).map((review, index) => {
                   return (
                     <ReviewDisplayComponent
                       key={index}
